@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>David Whitney</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/davidwhitney/ReallySimpleFeatureToggle</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>A tiny C# framework for feature configuration and toggling</summary>
+    <description>$description$</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>configuration feature-wall feature-configuration continuous-integration continuous-delivery mvt multivariant enabled-for-percentage feature feature toggle</tags>
+  </metadata>
+</package>
