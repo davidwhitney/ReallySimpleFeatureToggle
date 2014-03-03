@@ -20,7 +20,12 @@ With Features as a first class citizen, a pipeline to extend how you evaulate fe
 
 The happy path use case of this library is trivial - add a configuration section to your app or web config file and start using the library. You don't need to worry about all the extensibility points as we've provided sane defaults for you.
 
-Add the NuGet package and consider this configuration:
+
+Add the NuGet package
+
+    PM> Install-Package ReallySimpleFeatureToggle
+
+Consider this configuration:
  
       <?xml version="1.0" encoding="utf-8" ?>
       <configuration>
