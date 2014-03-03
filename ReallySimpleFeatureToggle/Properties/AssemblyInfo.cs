@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ReallySimpleFeature")]
+[assembly: AssemblyTitle("ReallySimpleFeatureToggle")]
 [assembly: AssemblyDescription("A tiny C# framework for feature toggling")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ElectricHeadSoftware")]
-[assembly: AssemblyProduct("ReallySimpleFeature")]
+[assembly: AssemblyCompany("Electric Head Software")]
+[assembly: AssemblyProduct("ReallySimpleFeatureToggle")]
 [assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
