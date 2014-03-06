@@ -35,31 +35,31 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
                 };
 
             _featureEvaluator = new FeatureEvaluator(_featureSettingRepo.Object,
-                                                             _featureAvailabilityRules, new List<IFeatureOverrideRule>(), new ThrowANotConfiguredException());
+                _featureAvailabilityRules, new List<IFeatureOverrideRule>(), new ThrowANotConfiguredException());
         }
         
         [Test]
-        public void IsAvailable_NoCorrespondingFeatureSettingAndCookieAvailableAndDependenciesOk_ThrowsException()
+        public void IsAvailable_NoCorrespondingFeatureSetting_ThrowsExceptionBecauseThatWasTheHandlerProvided()
         {
             _featureSettings.Add(new Feature("Blah"));
             
-            var manifest = _featureEvaluator.LoadConfiguration();
+            var config = _featureEvaluator.LoadConfiguration();
 
-            Assert.Throws<FeatureNotConfiguredException>(() => manifest.IsAvailable(TestFeatures.TestFeature1));
+            Assert.Throws<FeatureNotConfiguredException>(() => config.IsAvailable(TestFeatures.TestFeature1));
         }  
 
         [Test]
-        public void IsAvailable_PreviewableAndCookieAvailableAndDependenciesOk_ReturnsTrue()
+        public void IsAvailable_FeatureEnabled_ReturnsTrue()
         {
             _featureSettings.Add(new Feature(TestFeatures.TestFeature1));
 
-            var manifest = _featureEvaluator.LoadConfiguration();
+            var config = _featureEvaluator.LoadConfiguration();
 
-            Assert.That(manifest.IsAvailable(TestFeatures.TestFeature1));
+            Assert.That(config.IsAvailable(TestFeatures.TestFeature1));
         }
 
         [Test]
-        public void IsAvailable_PreviewableAndCookieAvailableAndDependencySettingsMissing_ThrowsException()
+        public void IsAvailable_EnabledAndDependencySettingsMissing_ThrowsException()
         {
             _featureSettings.Add(new Feature(TestFeatures.TestFeature1)
                 {
@@ -70,7 +70,7 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
         }
 
         [Test]
-        public void IsAvailable_PreviewableAndCookieAvailableAndDependencySettingsOK_ReturnsTrue()
+        public void IsAvailable_EnabledAndDependencySettingsOK_ReturnsTrue()
         {
             _featureSettings.Add(new Feature(TestFeatures.TestFeature1)
                 {
@@ -78,13 +78,13 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
                 });
             _featureSettings.Add(new Feature(TestFeatures.TestFeature5));
 
-            var manifest = _featureEvaluator.LoadConfiguration();
+            var config = _featureEvaluator.LoadConfiguration();
 
-            Assert.That(manifest.IsAvailable(TestFeatures.TestFeature1));
+            Assert.That(config.IsAvailable(TestFeatures.TestFeature1));
         }
 
         [Test]
-        public void IsAvailable_DisabledAndCookieAvailableAndDependencySettingsOK_ReturnsFalse()
+        public void IsAvailable_DisabledAndDependencySettingsOK_ReturnsFalse()
         {
             _featureSettings.Add(new Feature(TestFeatures.TestFeature1)
                 {
@@ -93,28 +93,13 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
                 });
             _featureSettings.Add(new Feature(TestFeatures.TestFeature5));
 
-            var manifest = _featureEvaluator.LoadConfiguration();
+            var config = _featureEvaluator.LoadConfiguration();
 
-            Assert.That(manifest.IsAvailable(TestFeatures.TestFeature1), Is.False);
+            Assert.That(config.IsAvailable(TestFeatures.TestFeature1), Is.False);
         }
 
         [Test]
-        public void IsAvailable_EnabledAndCookieAvailableAndDependencySettingsOK_ReturnsTrue()
-        {
-            _featureSettings.Add(new Feature(TestFeatures.TestFeature1)
-                {
-                    State = State.Enabled,
-                    Dependencies = new[] {TestFeatures.TestFeature5}
-                });
-            _featureSettings.Add(new Feature(TestFeatures.TestFeature5));
-            
-            var manifest = _featureEvaluator.LoadConfiguration();
-
-            Assert.That(manifest.IsAvailable(TestFeatures.TestFeature1));
-        }
-
-        [Test]
-        public void IsAvailable_EnabledAndCookieAvailableAndDependencySettingsNotOK_ReturnsFalse()
+        public void IsAvailable_EnabledAndDependencySettingsNotOK_ReturnsFalse()
         {
             _featureSettings.Add(new Feature(TestFeatures.TestFeature1)
                 {
@@ -126,28 +111,10 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
                     State = State.Disabled,
                 });
             
-            var manifest = _featureEvaluator.LoadConfiguration();
+            var config = _featureEvaluator.LoadConfiguration();
 
-            Assert.That(!manifest.IsAvailable(TestFeatures.TestFeature1));
+            Assert.That(!config.IsAvailable(TestFeatures.TestFeature1));
         }
-
-        [Test]
-        public void IsAvailable_EnabledAndCookieAvailableAndDependencySettingsNotOK_ReturnsFalse2()
-        {
-            _featureSettings.Add(new Feature(TestFeatures.TestFeature1)
-                {
-                    State = State.Enabled,
-                    Dependencies = new[] {TestFeatures.TestFeature5}
-                });
-            _featureSettings.Add(new Feature(TestFeatures.TestFeature5)
-                {
-                    State = State.Disabled
-                });
-            
-            var manifest = _featureEvaluator.LoadConfiguration();
-
-            Assert.That(!manifest.IsAvailable(TestFeatures.TestFeature1));
-        }  
 
         [Test]
         public void IsAvailable_FeatureDependsOnItself_Throws()
@@ -177,18 +144,6 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
                 });
             
             Assert.Throws<CircularDependencyException>(()=> _featureEvaluator.LoadConfiguration());
-        }       
-
-        [Test]
-        public void IsAvailable_EnabledAndCookieAvailableAndDependencySettingsOKAndStartAfterEndDate_DoesNotThrowException()
-        {
-            Assert.DoesNotThrow(
-                () =>
-                new Feature(TestFeatures.TestFeature1)
-                {
-                    StartDtg = DateTime.Now.AddDays(1),
-                    EndDtg = DateTime.Now.AddDays(2),
-                });
-        }
+        }    
     }
 }

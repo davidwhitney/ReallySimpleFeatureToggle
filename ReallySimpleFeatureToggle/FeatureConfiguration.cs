@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
 
 namespace ReallySimpleFeatureToggle

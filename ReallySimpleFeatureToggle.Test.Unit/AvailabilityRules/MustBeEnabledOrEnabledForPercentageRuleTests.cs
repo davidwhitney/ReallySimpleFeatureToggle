@@ -7,7 +7,7 @@ using ReallySimpleFeatureToggle.Infrastructure;
 namespace ReallySimpleFeatureToggle.Test.Unit.AvailabilityRules
 {
     [TestFixture]
-    public class FeatureSettingExtensionsStateTests
+    public class MustBeEnabledOrEnabledForPercentageRuleTests
     {
         private MustBeEnabledOrEnabledForPercentageRule _rule;
 

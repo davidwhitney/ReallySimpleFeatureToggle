@@ -7,7 +7,7 @@ using ReallySimpleFeatureToggle.Test.Unit.TestHelpers;
 namespace ReallySimpleFeatureToggle.Test.Unit.AvailabilityRules
 {
     [TestFixture]
-    public class FeatureSettingExtensionsTenantTests
+    public class MustBeAvailableForCurrentTenantRuleTests
     {
         private MustBeAvailableForCurrentTenantRule _rule;
 

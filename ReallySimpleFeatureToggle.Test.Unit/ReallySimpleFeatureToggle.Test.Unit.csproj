@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AppConfigProvider\AppConfigFeatureSettingRepositoryTests.cs" />
     <Compile Include="Configuration\CachingFeaturesRepositoryTests.cs" />
+    <Compile Include="Configuration\FeatureTests.cs" />
     <Compile Include="FeatureConfigurationTests.cs" />
     <Compile Include="ReallySimpleFeatureTests.cs" />
     <Compile Include="ReallySimpleFeatureToggleConfigurationApiTests.cs" />
@@ -60,8 +61,8 @@
     <Compile Include="FeatureExtensionsTests.cs" />
     <Compile Include="FeatureStateEvaluation\FeatureEvaluatorTests.cs" />
     <Compile Include="AvailabilityRules\MustBeInDateRangeConfiguredRuleTests.cs" />
-    <Compile Include="AvailabilityRules\FeatureSettingExtensionsStateTests.cs" />
-    <Compile Include="AvailabilityRules\FeatureSettingExtensionsTenantTests.cs" />
+    <Compile Include="AvailabilityRules\MustBeEnabledOrEnabledForPercentageRuleTests.cs" />
+    <Compile Include="AvailabilityRules\MustBeAvailableForCurrentTenantRuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\TestOverrideThatDoesNothing.cs" />
     <Compile Include="TestHelpers\TestTenants.cs" />
