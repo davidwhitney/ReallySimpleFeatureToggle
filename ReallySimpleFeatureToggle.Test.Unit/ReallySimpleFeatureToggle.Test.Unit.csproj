@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\AppConfigProvider\AppConfigFeatureSettingRepositoryTests.cs" />
+    <Compile Include="Configuration\AppConfigProvider\FeatureConfigurationElementTests.cs" />
     <Compile Include="Configuration\CachingFeaturesRepositoryTests.cs" />
     <Compile Include="Configuration\FeatureTests.cs" />
     <Compile Include="FeatureConfigurationTests.cs" />

@@ -26,10 +26,19 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
         public State State
         {
             get
-            {           
-                return (int)this["state"] == 0 ? State.Enabled : (State)this["state"];
+            {
+                var value = this["state"];
+                if (value is State)
+                {
+                    return (State)value;
+                }
+
+                return (State)Enum.Parse(typeof(State), value.ToString(), true);
             }
-            set { this["state"] = Enum.GetName(typeof (State), value); }
+            set
+            {
+                this["state"] = value;
+            }
         }
 
         /// <summary>
@@ -41,13 +50,18 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
         {
             get
             {
-                if (this["supportedTenants"] is CommaDelimitedStringCollection)
+                var collection = this["supportedTenants"] as CommaDelimitedStringCollection;
+                if (collection != null)
                 {
-                    return (((CommaDelimitedStringCollection)this["supportedTenants"]).Cast<string>().Select(t => t)).ToArray();
+                    return (collection.Cast<string>().Select(t => t)).ToArray();
                 }
 
-                var tenants = this["supportedTenants"] as string[];
-                return tenants ?? new [] {Tenant.All};
+                if (this["supportedTenants"] is string[])
+                {
+                    return this["supportedTenants"] as string[];
+                }
+
+                return new [] {Tenant.All};
             }
             set { this["supportedTenants"] = value; }
         }
@@ -59,9 +73,17 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
             get
             {
                 var collection = this["excludedTenants"] as CommaDelimitedStringCollection;
-                return collection == null
-                           ? new string[0]
-                           : collection.Cast<string>().ToArray();
+                if (collection != null)
+                {
+                    return collection.Cast<string>().ToArray();
+                }
+
+                if (this["excludedTenants"] is string[])
+                {
+                    return this["excludedTenants"] as string[];
+                }
+
+                return new string[0];
             }
             set { this["excludedTenants"] = value; }
         }
@@ -72,10 +94,13 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
         {
             get
             {
-                var dependencies = ((CommaDelimitedStringCollection) this["dependencies"])
-                                   ?? new CommaDelimitedStringCollection();
+                if (!(this["dependencies"] is CommaDelimitedStringCollection))
+                {
+                    return this["dependencies"] as string[];
+                }
 
-                return (dependencies.Cast<string>().Select(t => t)).ToArray();
+                var csv = (this["dependencies"] as CommaDelimitedStringCollection);
+                return (csv.Cast<string>().Select(t => t)).ToArray();
             }
             set { this["dependencies"] = value; }
         }
@@ -103,6 +128,7 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
         public int RandomPercentageEnabled
         {
             get { return (int) this["randomPercentageEnabled"]; }
+            set { this["randomPercentageEnabled"] = value; }
         }
     }
 }
