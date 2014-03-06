@@ -15,10 +15,5 @@ namespace ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours
         {
             return _value;
         }
-
-        public bool GetFeatureAvailabilityWhenFeatureWasNotConfigured(IFeature feature, Exception anyException)
-        {
-            return _value;
-        }
     }
 }

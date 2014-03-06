@@ -8,11 +8,5 @@ namespace ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours
         {
             throw new FeatureNotConfiguredException(featureName, anyException);
         }
-
-        public bool GetFeatureAvailabilityWhenFeatureWasNotConfigured(IFeature feature, Exception anyException)
-        {
-            throw new FeatureNotConfiguredException(feature.Name, anyException);
-
-        }
     }
 }
