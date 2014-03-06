@@ -58,7 +58,6 @@
     <Compile Include="TestHelpers\TestFeaturesFromAppConfig.cs" />
     <Compile Include="TestHelpers\TestAvailabilityRuleThatReturns.cs" />
     <Compile Include="TestHelpers\TestFeatures.cs" />
-    <Compile Include="FeatureExtensionsTests.cs" />
     <Compile Include="FeatureStateEvaluation\FeatureEvaluatorTests.cs" />
     <Compile Include="AvailabilityRules\MustBeInDateRangeConfiguredRuleTests.cs" />
     <Compile Include="AvailabilityRules\MustBeEnabledOrEnabledForPercentageRuleTests.cs" />
