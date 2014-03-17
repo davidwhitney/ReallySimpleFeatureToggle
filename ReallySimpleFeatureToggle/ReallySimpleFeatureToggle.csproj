@@ -55,6 +55,7 @@
     <Compile Include="Configuration\IFeatureWithFluentExtensions.cs" />
     <Compile Include="Configuration\FeatureNotConfiguredBehaviours\ReturnBoolWhenFeatureNotConfigured.cs" />
     <Compile Include="Configuration\FeatureNotConfiguredBehaviours\ThrowANotConfiguredException.cs" />
+    <Compile Include="Extensibility\IPluginBootstrapper.cs" />
     <Compile Include="FeatureOverrides\IFeatureOverrideRule.cs" />
     <Compile Include="Infrastructure\IRandomNumberGenerator.cs" />
     <Compile Include="Infrastructure\RandomNumberGenerator.cs" />

@@ -4,6 +4,7 @@ using Moq;
 using NUnit.Framework;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
+using ReallySimpleFeatureToggle.Extensibility;
 
 namespace ReallySimpleFeatureToggle.Test.Unit
 {
@@ -74,6 +75,25 @@ namespace ReallySimpleFeatureToggle.Test.Unit
             Assert.That(features.Count, Is.EqualTo(1));
             Assert.That(features.First().Name, Is.EqualTo("MyFeature"));
             Assert.That(features.First().State, Is.EqualTo(State.Enabled));
+        }
+
+        [Test]
+        public void WithModule_ModuleProvided_ExecutesModuleAllowingItToManipulateConfiguration()
+        {
+            var pluginBootstrapper = new FakePluginBootstrapper();
+
+            _config.WithPlugin(pluginBootstrapper);
+            
+            Assert.That(pluginBootstrapper.WasCalled, Is.True);
+        }
+
+        public class FakePluginBootstrapper : IPluginBootstrapper
+        {
+            public bool WasCalled { get; set; }
+            public void Configure(ReallySimpleFeatureToggleConfigurationApi configurationApi)
+            {
+                WasCalled = true;
+            }
         }
     }
 }

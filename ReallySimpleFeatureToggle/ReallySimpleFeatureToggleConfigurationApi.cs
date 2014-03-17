@@ -5,6 +5,7 @@ using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.AppConfigProvider;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
 using ReallySimpleFeatureToggle.Configuration.FluentConfigProvider;
+using ReallySimpleFeatureToggle.Extensibility;
 using ReallySimpleFeatureToggle.FeatureOverrides;
 using ReallySimpleFeatureToggle.Infrastructure;
 
@@ -76,6 +77,12 @@ namespace ReallySimpleFeatureToggle
         public IReallySimpleFeatureToggle And()
         {
             return Parent;
+        }
+
+        public IReallySimpleFeatureToggleConfigurationApi WithPlugin(IPluginBootstrapper pluginBootstrapper)
+        {
+            pluginBootstrapper.Configure(this);
+            return this;
         }
     }
 }
