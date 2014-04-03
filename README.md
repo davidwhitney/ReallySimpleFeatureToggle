@@ -1,4 +1,4 @@
-ReallySimpleFeatureToggle [![Build status](https://ci.appveyor.com/api/projects/status?id=e4fordvbcynvawej)](https://ci.appveyor.com/project/reallysimplefeaturetoggle)
+ReallySimpleFeatureToggle [![Build status](https://ci.appveyor.com/api/projects/status/e4fordvbcynvawej)](https://ci.appveyor.com/project/DavidWhitney/reallysimplefeaturetoggle)
 =======================
 
 A feature configuration library for .NET!
