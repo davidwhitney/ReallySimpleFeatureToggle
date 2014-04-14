@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ReallySimpleFeatureToggle.AvailabilityRules;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
+using ReallySimpleFeatureToggle.Extensibility;
 using ReallySimpleFeatureToggle.FeatureOverrides;
 
 namespace ReallySimpleFeatureToggle
@@ -18,6 +19,8 @@ namespace ReallySimpleFeatureToggle
         /// Defaults to ThrowANotConfiguredException. Options: "FeatureShouldBeEnabled", "FeatureShouldBeDisabled".
         /// </summary>
         IReallySimpleFeatureToggleConfigurationApi WhenFeatureRequestedIsNotConfigured(IFeatureNotConfiguredBehaviour notConfiguredBehaviour);
+
+        IReallySimpleFeatureToggleConfigurationApi WithPlugin(IPluginBootstrapper pluginBootstrapper);
 
         IReallySimpleFeatureToggle And();
     }

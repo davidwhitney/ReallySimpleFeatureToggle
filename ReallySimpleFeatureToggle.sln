@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.ExampleApplicationUsage", "ReallySimpleFeatureToggle.ExampleApplicationUsage\ReallySimpleFeatureToggle.ExampleApplicationUsage.csproj", "{CA97E887-71DD-457C-ACC8-313B65D5158B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.ExampleMvcSite", "ReallySimpleFeatureToggle.Web.ExampleMvcSite\ReallySimpleFeatureToggle.Web.ExampleMvcSite.csproj", "{E15AF4E6-14E4-41C6-8B9D-672D9468B012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.Mvc", "ReallySimpleFeatureToggle.Web.Mvc\ReallySimpleFeatureToggle.Web.Mvc.csproj", "{9D604F95-FFF7-463F-A583-05377787E3EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +50,14 @@ Global
 		{CA97E887-71DD-457C-ACC8-313B65D5158B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA97E887-71DD-457C-ACC8-313B65D5158B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA97E887-71DD-457C-ACC8-313B65D5158B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15AF4E6-14E4-41C6-8B9D-672D9468B012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15AF4E6-14E4-41C6-8B9D-672D9468B012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15AF4E6-14E4-41C6-8B9D-672D9468B012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15AF4E6-14E4-41C6-8B9D-672D9468B012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D604F95-FFF7-463F-A583-05377787E3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D604F95-FFF7-463F-A583-05377787E3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D604F95-FFF7-463F-A583-05377787E3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D604F95-FFF7-463F-A583-05377787E3EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
