@@ -25,5 +25,10 @@ namespace ReallySimpleFeatureToggle.Web.ExampleMvcSite.Controllers
 
             return View();
         }
+
+        public ActionResult SomeActionForRenderAction()
+        {
+            return PartialView("partial");
+        }
     }
 }

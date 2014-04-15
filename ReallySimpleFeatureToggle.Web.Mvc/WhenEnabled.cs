@@ -7,7 +7,7 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
 {
     internal static class WhenEnabled
     {
-        private const string Featurename = "FeatureName";
+        public const string FeatureNameKey = "FeatureName";
         internal static Func<IFeatureConfiguration> GetFeatureConfiguration { get; set; }
 
         internal static void ForFeature(string featureName, object values, Action action)
@@ -23,12 +23,12 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
                 return;
             }
 
-            if (viewData.ContainsKey(Featurename))
+            if (viewData.ContainsKey(FeatureNameKey))
             {
-                viewData.Remove(Featurename);
+                viewData.Remove(FeatureNameKey);
             }
 
-            viewData[Featurename] = featureName;
+            viewData[FeatureNameKey] = featureName;
 
             action();
         }
@@ -46,12 +46,12 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
                 return new MvcHtmlString("");
             }
 
-            if (viewData.ContainsKey(Featurename))
+            if (viewData.ContainsKey(FeatureNameKey))
             {
-                viewData.Remove(Featurename);
+                viewData.Remove(FeatureNameKey);
             }
 
-            viewData[Featurename] = featureName;
+            viewData[FeatureNameKey] = featureName;
 
             return action();
         }

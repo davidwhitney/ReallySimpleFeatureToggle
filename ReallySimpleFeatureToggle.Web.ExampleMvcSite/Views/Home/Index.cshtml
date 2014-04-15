@@ -26,4 +26,22 @@
             @Html.PartialFeature("EnabledFor50Percent", "SomeFeature")
         </p>
     </div>
+    <div class="col-md-6">
+        <h2>@@{ RenderActionFeature() }</h2>
+        <p>
+            @{
+                Html.RenderActionFeature("EnabledFeature", "SomeActionForRenderAction");
+                Html.RenderActionFeature("DisabledFeature", "SomeActionForRenderAction");
+                Html.RenderActionFeature("EnabledFor50Percent", "SomeActionForRenderAction");
+            }
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>@@Html.ActionFeature()</h2>
+        <p>
+            @Html.ActionFeature("EnabledFeature", "SomeActionForRenderAction")
+            @Html.ActionFeature("DisabledFeature", "SomeActionForRenderAction")
+            @Html.ActionFeature("EnabledFor50Percent", "SomeActionForRenderAction")
+        </p>
+    </div>
 </div>
