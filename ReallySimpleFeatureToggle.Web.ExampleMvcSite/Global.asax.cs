@@ -10,7 +10,9 @@ namespace ReallySimpleFeatureToggle.Web.ExampleMvcSite
     {
         protected void Application_Start()
         {
-            ReallySimpleFeature.Toggles.Configure.WithPlugin(new MvcPlugin());
+            ReallySimpleFeature.Toggles.Configure
+                .WithPlugin(new WebPlugin())
+                .WithPlugin(new MvcPlugin());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

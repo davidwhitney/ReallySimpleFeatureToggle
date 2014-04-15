@@ -13,7 +13,7 @@ namespace ReallySimpleFeatureToggle.Web.FeatureOverrides
         public void Apply(FeatureConfiguration manifest, EvaluationContext context)
         {
             var qs = HttpContext.Current.Request.QueryString;
-            if (!qs.AllKeys.AsEnumerable().Contains(QueryStringKey))
+            if (!qs.AllKeys.Contains(QueryStringKey))
             {
                 return;
             }
