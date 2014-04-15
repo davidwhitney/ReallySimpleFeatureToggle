@@ -21,7 +21,6 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var config = GetFeatureConfiguration();
-
             if (config.IsAvailable(Feature))
             {
                 return;

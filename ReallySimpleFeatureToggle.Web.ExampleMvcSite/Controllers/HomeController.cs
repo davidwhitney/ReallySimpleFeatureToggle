@@ -18,6 +18,7 @@ namespace ReallySimpleFeatureToggle.Web.ExampleMvcSite.Controllers
             return View();
         }
 
+        [Feature("EnabledFor50Percent")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

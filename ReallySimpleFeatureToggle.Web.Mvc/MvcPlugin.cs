@@ -7,6 +7,7 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
         public void Configure(ReallySimpleFeatureToggleConfigurationApi configurationApi)
         {
             FeatureAttribute.GetFeatureConfiguration = () => ReallySimpleFeature.Toggles.GetFeatureConfiguration();
+            WhenEnabled.GetFeatureConfiguration = () => ReallySimpleFeature.Toggles.GetFeatureConfiguration();
         }
     }
 }

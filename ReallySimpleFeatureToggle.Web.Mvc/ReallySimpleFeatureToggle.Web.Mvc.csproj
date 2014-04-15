@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FeatureAttribute.cs" />
+    <Compile Include="PartialFeatureExtensions.cs" />
+    <Compile Include="RenderPartialFeatureExtensions.cs" />
     <Compile Include="MvcPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WhenEnabled.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
