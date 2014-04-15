@@ -48,6 +48,7 @@
     <Compile Include="AvailabilityRules\FeatureSettingExtensionsStateTests.cs" />
     <Compile Include="FeatureOverrides\QueryStringOverrideRuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebPluginTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReallySimpleFeatureToggle.Test.Unit\ReallySimpleFeatureToggle.Test.Unit.csproj">
@@ -62,6 +63,9 @@
       <Project>{300B92EF-79AF-4225-83B3-D89F9995F357}</Project>
       <Name>ReallySimpleFeatureToggle</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AvailabilityRules\CookieSettingStorage\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
