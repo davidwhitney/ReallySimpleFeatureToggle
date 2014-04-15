@@ -45,6 +45,7 @@ namespace ReallySimpleFeatureToggle.Test.Unit
                 })
                 .And().GetFeatureConfiguration();
 
+
             Assert.That(featureSet.IsAvailable("Awesome"), Is.True);
             Assert.That(featureSet.IsAvailable("Awesome3"), Is.False);
         }

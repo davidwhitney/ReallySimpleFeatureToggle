@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ReallySimpleFeatureToggle.AvailabilityRules;
 
 namespace ReallySimpleFeatureToggle.Configuration
 {
@@ -7,12 +9,14 @@ namespace ReallySimpleFeatureToggle.Configuration
         public Feature(string name)
         {
             Name = name;
+            AdditionalRules = new List<IAvailabilityRule>();
         }
 
         public string Name { get; set; }
 
         public State State { get; set; }
         public int RandomPercentageEnabled { get; set; }
+        public IList<IAvailabilityRule> AdditionalRules { get; set; } 
 
         private string[] _dependencies;
         public string[] Dependencies

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using ReallySimpleFeatureToggle.AvailabilityRules;
 
 namespace ReallySimpleFeatureToggle.Configuration
 {
@@ -13,5 +15,6 @@ namespace ReallySimpleFeatureToggle.Configuration
         DateTime EndDtg { get; set; }
 
         int RandomPercentageEnabled { get; set; }
+        IList<IAvailabilityRule> AdditionalRules { get; set; } 
     }
 }

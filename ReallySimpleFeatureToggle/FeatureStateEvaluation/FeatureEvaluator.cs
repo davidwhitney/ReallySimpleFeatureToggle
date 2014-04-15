@@ -79,7 +79,10 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
 
             featuresCurrentlyUnderAnalysis.Remove(featureToCheck);
 
-            return _availabilityRules.All(rule => rule.IsAvailable(featureToCheck, context)) || _availabilityRules.Count == 0;
+            var globalAvailabilityCheckSuccessful = _availabilityRules.All(rule => rule.IsAvailable(featureToCheck, context)) || _availabilityRules.Count == 0;
+            var customRulesCheckSuccessful = featureToCheck.AdditionalRules.All(rule => rule.IsAvailable(featureToCheck, context)) || featureToCheck.AdditionalRules.Count == 0;
+            
+            return globalAvailabilityCheckSuccessful && customRulesCheckSuccessful;
         }
     }
 }
