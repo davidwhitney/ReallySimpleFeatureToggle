@@ -6,17 +6,16 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
     public class FeatureOptionsCookieParser : IFeatureOptionsCookieParser
     {
-        private readonly HttpContextBase _context;
         public static string CookieName = "FeatureOptions";
-
-        public FeatureOptionsCookieParser(HttpContextBase context)
-        {
-            _context = context;
-        }
 
         public FeatureOptionsCookie GetFeatureOptionsCookie()
         {
-            var cookie = _context.Request.Cookies[CookieName];
+            return GetFeatureOptionsCookie(new HttpContextWrapper(HttpContext.Current));
+        }
+
+        public FeatureOptionsCookie GetFeatureOptionsCookie(HttpContextBase context)
+        {
+            var cookie = context.Request.Cookies[CookieName];
             var defaultCookie = new FeatureOptionsCookie();
 
             if (cookie == null)
@@ -54,20 +53,30 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
         public void SetFeatureOptionsCookie(FeatureOptionsCookie featureOptions)
         {
+            SetFeatureOptionsCookie(new HttpContextWrapper(HttpContext.Current), featureOptions);
+        }
+
+        public void SetFeatureOptionsCookie(HttpContextBase context, FeatureOptionsCookie featureOptions)
+        {
             var cookieContent = JsonConvert.SerializeObject(featureOptions);
             var cookie = new HttpCookie(CookieName, cookieContent) { Expires = 365.Days().Hence(), Path = "/" };
-            _context.Response.SetCookie(cookie);
+            context.Response.SetCookie(cookie);
         }
 
         public void ClearSavedOptions()
         {
-            if (_context.Request.Cookies[CookieName] == null)
+            ClearSavedOptions(new HttpContextWrapper(HttpContext.Current));
+        }
+
+        public void ClearSavedOptions(HttpContextBase context)
+        {
+            if (context.Request.Cookies[CookieName] == null)
             {
                 return;
             }
 
             var cookie = new HttpCookie(CookieName) { Expires = 1.Day().Ago() };
-            _context.Response.Cookies.Add(cookie);
+            context.Response.Cookies.Add(cookie);
         }
     }
 
