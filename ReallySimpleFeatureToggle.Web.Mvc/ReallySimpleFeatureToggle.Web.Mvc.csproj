@@ -41,8 +41,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFeatureExtensions.cs" />
     <Compile Include="FeatureAttribute.cs" />
     <Compile Include="PartialFeatureExtensions.cs" />
+    <Compile Include="RenderActionFeatureExtensions.cs" />
     <Compile Include="RenderPartialFeatureExtensions.cs" />
     <Compile Include="MvcPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

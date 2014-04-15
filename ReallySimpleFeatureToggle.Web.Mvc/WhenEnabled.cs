@@ -1,12 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ReallySimpleFeatureToggle.Web.Mvc
 {
     internal static class WhenEnabled
     {
+        private const string Featurename = "FeatureName";
         internal static Func<IFeatureConfiguration> GetFeatureConfiguration { get; set; }
+
+        internal static void ForFeature(string featureName, object values, Action action)
+        {
+            ForFeature(featureName, new RouteValueDictionary(values), action);
+        }
 
         internal static void ForFeature(string featureName, IDictionary<string, object> viewData, Action action)
         {
@@ -16,14 +23,19 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
                 return;
             }
 
-            if (viewData.ContainsKey("FeatureName"))
+            if (viewData.ContainsKey(Featurename))
             {
-                viewData.Remove("FeatureName");
+                viewData.Remove(Featurename);
             }
 
-            viewData["FeatureName"] = featureName;
+            viewData[Featurename] = featureName;
 
             action();
+        }
+
+        internal static MvcHtmlString ForFeature(string featureName, object values, Func<MvcHtmlString> action)
+        {
+            return ForFeature(featureName, new RouteValueDictionary(values), action);
         }
 
         internal static MvcHtmlString ForFeature(string featureName, IDictionary<string, object> viewData, Func<MvcHtmlString> action)
@@ -34,12 +46,12 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
                 return new MvcHtmlString("");
             }
 
-            if (viewData.ContainsKey("FeatureName"))
+            if (viewData.ContainsKey(Featurename))
             {
-                viewData.Remove("FeatureName");
+                viewData.Remove(Featurename);
             }
 
-            viewData["FeatureName"] = featureName;
+            viewData[Featurename] = featureName;
 
             return action();
         }
