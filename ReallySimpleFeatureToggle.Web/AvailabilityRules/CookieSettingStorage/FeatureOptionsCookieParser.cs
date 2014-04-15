@@ -1,4 +1,3 @@
-using System;
 using System.Web;
 using Newtonsoft.Json;
 
@@ -77,34 +76,6 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
             var cookie = new HttpCookie(CookieName) { Expires = 1.Day().Ago() };
             context.Response.Cookies.Add(cookie);
-        }
-    }
-
-    internal static class SyntaticSugar
-    {
-        public static TimeSpan Day(this int i)
-        {
-            if (i != 1)
-            {
-                throw new ArgumentOutOfRangeException("i", "Value must be 1.");
-            }
-
-            return TimeSpan.FromDays(i);
-        }
-
-        public static TimeSpan Days(this int i)
-        {
-            return TimeSpan.FromDays(i);
-        }
-
-        public static DateTime Ago(this TimeSpan t)
-        {
-            return DateTime.Now - t;
-        }
-
-        public static DateTime Hence(this TimeSpan t)
-        {
-            return DateTime.Now + t;
         }
     }
 }

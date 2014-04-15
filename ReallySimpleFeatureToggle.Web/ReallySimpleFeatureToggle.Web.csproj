@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvailabilityRules\CookieSettingStorage\SyntaticSugar.cs" />
     <Compile Include="AvailabilityRules\MustBeEnabledOrEnabledForPercentageStickyRule.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\CookieSettingStorage.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\FeatureOptionsCookie.cs" />

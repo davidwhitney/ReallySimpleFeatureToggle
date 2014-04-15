@@ -19,21 +19,20 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules
 
         public bool IsAvailable(IFeature feature, EvaluationContext context)
         {
-            if (feature.State == State.EnabledForPercentage)
+            if (feature.State != State.EnabledForPercentage)
             {
-                var number = _randomNumberGenerator.GetRandomNumberBetween(0, 100);
-                var decision = number < feature.RandomPercentageEnabled;
-
-                var featureSettings = _featureOptionsCookieParser.GetFeatureOptionsCookie();
-                if (!featureSettings.FeatureStates.ContainsKey(feature.Name))
-                {
-                    _featureOptionsCookieParser.AddFeatureSetting(feature.Name, decision);
-                }
-
-                return decision;
+                return feature.State == State.Enabled;
             }
 
-            return feature.State == State.Enabled;
+            var decision = _randomNumberGenerator.GetRandomNumberBetween(0, 100) < feature.RandomPercentageEnabled;
+
+            var featureSettings = _featureOptionsCookieParser.GetFeatureOptionsCookie();
+            if (!featureSettings.FeatureStates.ContainsKey(feature.Name))
+            {
+                _featureOptionsCookieParser.AddFeatureSetting(feature.Name, decision);
+            }
+
+            return decision;
         }
     }
 }

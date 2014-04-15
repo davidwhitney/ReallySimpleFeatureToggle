@@ -12,25 +12,21 @@ namespace ReallySimpleFeatureToggle.Web.FeatureOverrides
 
         public void Apply(FeatureConfiguration manifest, EvaluationContext context)
         {
-            var qs = HttpContext.Current.Request.QueryString;
-            if (!qs.AllKeys.Contains(QueryStringKey))
+            if (!HttpContext.Current.Request.QueryString.AllKeys.Contains(QueryStringKey))
             {
                 return;
             }
-            Apply(manifest, context, qs);
+
+            Apply(manifest, context, HttpContext.Current.Request.QueryString);
         }
 
         public void Apply(FeatureConfiguration manifest, EvaluationContext context, NameValueCollection qs)
         {
             var qsValue = qs[QueryStringKey] ?? "";
             var qsItems = qsValue.Split(',');
-            foreach (var featureName in qsItems)
+
+            foreach (var featureName in qsItems.Where(manifest.ContainsKey))
             {
-                if (!manifest.ContainsKey(featureName))
-                {
-                    continue;
-                }
-                
                 manifest[featureName].IsAvailable = true;
             }
         }
