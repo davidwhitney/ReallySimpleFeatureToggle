@@ -27,6 +27,10 @@ namespace ReallySimpleFeatureToggle.ExampleApplicationUsage
             {
                 Console.WriteLine("This feature is clearly enabled");
             }
+            else
+            {
+                Console.WriteLine("EnabledFeature should have been enabled but it isn't because a rule failed?!");
+            }
 
             if (config.IsAvailable(FeaturesStrings.EnabledFeature))
             {
