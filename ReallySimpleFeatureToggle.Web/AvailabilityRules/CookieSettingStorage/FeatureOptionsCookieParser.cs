@@ -5,7 +5,13 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
     public class FeatureOptionsCookieParser : IFeatureOptionsCookieParser
     {
+        private readonly IJsonSerializer _serializer;
         public static string CookieName = "FeatureOptions";
+
+        public FeatureOptionsCookieParser(IJsonSerializer serializer = null)
+        {
+            _serializer = serializer ?? new JsonDotNetSerializer();
+        }
 
         public FeatureOptionsCookie GetFeatureOptionsCookie()
         {
@@ -24,7 +30,7 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
             try
             {
-                return JsonConvert.DeserializeObject<FeatureOptionsCookie>(cookie.Value) ?? defaultCookie;
+                return _serializer.DeserializeObject<FeatureOptionsCookie>(cookie.Value) ?? defaultCookie;
             }
             catch // Just in case our cookie format changes
             {

@@ -1,0 +1,36 @@
+using System.IO;
+using System.Runtime.Serialization.Json;
+
+namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
+{
+    public class DataContractSerializer : IJsonSerializer
+    {
+        public string SerializeObject(object obj)
+        {
+            using (var stream1 = new MemoryStream())
+            {
+                var contractJsonSerializer = new DataContractJsonSerializer(obj.GetType());
+                contractJsonSerializer.WriteObject(stream1, obj);
+                stream1.Position = 0;
+
+                using (var reader = new StreamReader(stream1))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        public T DeserializeObject<T>(string value)
+        {
+            using (var stream = new MemoryStream())
+            using (var sw = new StreamWriter(stream))
+            {
+                sw.Write(value);
+                stream.Position = 0;
+
+                var contractJsonSerializer = new DataContractJsonSerializer(typeof (T));
+                return (T)contractJsonSerializer.ReadObject(stream);
+            }
+        }
+    }
+}
