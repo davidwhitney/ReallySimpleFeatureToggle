@@ -12,4 +12,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>configuration feature-wall feature-configuration enabled-for-percentage feature feature toggle web mvt reallysimplefeaturetoggle</tags>
   </metadata>
+  <dependencies>
+	<dependency id="ReallySimpleFeatureToggle" version="$version$" />
+  </dependencies>
 </package>
