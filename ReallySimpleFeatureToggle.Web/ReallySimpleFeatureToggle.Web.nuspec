@@ -14,5 +14,11 @@
 	  <dependencies>
 		<dependency id="ReallySimpleFeatureToggle" version="$version$" />
 	  </dependencies>
+	  <frameworkAssemblies>
+		<frameworkAssembly assemblyName="System.Web" targetFramework="net40" />
+	  </frameworkAssemblies>
+	<releaseNotes>
+		Initial release, enable by calling ReallySimpleFeature.Toggles.Configure.WithPlugin(new WebPlugin()); 
+	</releaseNotes> 
   </metadata>
 </package>
