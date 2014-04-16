@@ -14,8 +14,9 @@ namespace ReallySimpleFeatureToggle.Configuration
             {
                 return Compile(expression);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                System.Diagnostics.Trace.WriteLine("Failed to compile rule: '" + expression + "' because " + ex.Message);
                 return null;
             }
         }
