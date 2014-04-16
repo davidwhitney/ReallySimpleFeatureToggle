@@ -55,7 +55,7 @@
     <Compile Include="Configuration\AppConfigProvider\DynamicRuleElementCollection.cs" />
     <Compile Include="Configuration\CachingFeaturesRepository.cs" />
     <Compile Include="AvailabilityRules\DynamicAvailabilityRule.cs" />
-    <Compile Include="Configuration\DynamicAvailabilityRuleCompiler.cs" />
+    <Compile Include="AvailabilityRules\DynamicAvailabilityRuleCompiler.cs" />
     <Compile Include="Configuration\FeatureNotConfiguredBehaviours\FeatureShouldBeDisabled.cs" />
     <Compile Include="Configuration\FeatureNotConfiguredBehaviours\FeatureShouldBeEnabled.cs" />
     <Compile Include="Configuration\FluentConfigProvider\FluentConfigurationRepository.cs" />

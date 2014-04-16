@@ -1,11 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using ReallySimpleFeatureToggle.AvailabilityRules;
 
 namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
 {
     public class AppConfigFeatureRepository : IFeatureRepository
     {
+        private readonly DynamicAvailabilityRuleCompiler _compiler;
+
+        public AppConfigFeatureRepository()
+        {
+            _compiler = new DynamicAvailabilityRuleCompiler();
+        }
+
         public ICollection<IFeature> GetFeatureSettings()
         {
             var cfg = (IFeatureConfigurationSection)ConfigurationManager.GetSection("features");
@@ -23,10 +31,9 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
                     RandomPercentageEnabled = fcse.RandomPercentageEnabled,
                 };
 
-                var compiler = new DynamicAvailabilityRuleCompiler();
                 foreach (var dynamicRule in fcse.Rules.Cast<DynamicRuleConfigurationElement>())
                 {
-                    var rule = compiler.TryCompile(dynamicRule.Rule);
+                    var rule = _compiler.TryCompile(dynamicRule.Rule);
 
                     if (rule != null)
                     {

@@ -14,7 +14,7 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
         {
             CurrentDateTime = DateTime.Now;
             Application = AppDomain.CurrentDomain;
-
+            
             if (System.Web.HttpContext.Current != null)
             {
                 HttpContext = new HttpContextWrapper(System.Web.HttpContext.Current);
