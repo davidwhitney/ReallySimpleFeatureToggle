@@ -16,7 +16,11 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
         private readonly IFeatureNotConfiguredBehaviour _featureNotConfiguredBehaviour;
         private readonly IEvaluationContextBuilder _evaluationContextBuilder;
 
-        public FeatureEvaluator(IFeatureRepository repository, IList<IAvailabilityRule> availabilityRules, IEnumerable<IFeatureOverrideRule> featureOverrides, IFeatureNotConfiguredBehaviour featureNotConfiguredBehaviour, IEvaluationContextBuilder evaluationContextBuilder)
+        public FeatureEvaluator(IFeatureRepository repository, 
+                                IList<IAvailabilityRule> availabilityRules, 
+                                IEnumerable<IFeatureOverrideRule> featureOverrides, 
+                                IFeatureNotConfiguredBehaviour featureNotConfiguredBehaviour, 
+                                IEvaluationContextBuilder evaluationContextBuilder)
         {
             _repository = repository;
             _availabilityRules = availabilityRules;
@@ -28,22 +32,13 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
         public IFeatureConfiguration LoadConfiguration(string forTenant = Tenant.All)
         {
             var context = _evaluationContextBuilder.Create(forTenant);
-
-            var featureConfiguration = new FeatureConfiguration();
-            featureConfiguration.FeatureNotConfiguredBehaviour = _featureNotConfiguredBehaviour;
-
+            var featureConfiguration = new FeatureConfiguration { FeatureNotConfiguredBehaviour = _featureNotConfiguredBehaviour };
             var featureSettings = _repository.GetFeatureSettings();
 
             foreach (var feature in featureSettings)
             {
-                var isAvailable = CalculateAvailability(feature, context, featureSettings, new List<IFeature>());
-
-                featureConfiguration.Add(feature.Name,
-                    new ActiveSettings
-                    {
-                        Dependencies = feature.Dependencies,
-                        IsAvailable = isAvailable,
-                    });
+                var isAvailable = CalculateAvailability(feature, context, featureSettings);
+                featureConfiguration.Add(feature.Name, new ActiveSettings {Dependencies = feature.Dependencies, IsAvailable = isAvailable});
             }
 
             foreach (var rule in _featureOverrides)
@@ -54,33 +49,31 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
             return featureConfiguration;
         }
 
-        private bool CalculateAvailability(IFeature featureToCheck, EvaluationContext context, ICollection<IFeature> allFeatureSettings,  ICollection<IFeature> featuresCurrentlyUnderAnalysis)
+        private bool CalculateAvailability(IFeature featureToCheck, EvaluationContext context, ICollection<IFeature> allFeatureSettings, ICollection<IFeature> relatedFeatures = null)
         {
-            if (featuresCurrentlyUnderAnalysis.Contains(featureToCheck))
+            relatedFeatures = relatedFeatures ?? new List<IFeature>();
+            if (relatedFeatures.Contains(featureToCheck))
             {
                 throw new CircularDependencyException();
             }
 
-            featuresCurrentlyUnderAnalysis.Add(featureToCheck);
+            relatedFeatures.Add(featureToCheck);
 
-            foreach (var dependency in featureToCheck.Dependencies)
+            foreach (var featureName in featureToCheck.Dependencies)
             {
-                try
+                var dependency = allFeatureSettings.FirstOrDefault(s => s.Name == featureName);
+                if (dependency == null)
                 {
-                    var dependencySetting = allFeatureSettings.First(s => s.Name == dependency);
-
-                    if (!CalculateAvailability(dependencySetting, context, allFeatureSettings, featuresCurrentlyUnderAnalysis))
-                    {
-                        return false;
-                    }
+                    return _featureNotConfiguredBehaviour.GetFeatureAvailabilityWhenFeatureWasNotConfigured(featureName);
                 }
-                catch (InvalidOperationException e)
+
+                if (!CalculateAvailability(dependency, context, allFeatureSettings, relatedFeatures))
                 {
-                    return _featureNotConfiguredBehaviour.GetFeatureAvailabilityWhenFeatureWasNotConfigured(dependency, e);
+                    return false;
                 }
             }
 
-            featuresCurrentlyUnderAnalysis.Remove(featureToCheck);
+            relatedFeatures.Remove(featureToCheck);
 
             var globalAvailabilityCheckSuccessful = _availabilityRules.All(rule => rule.IsAvailable(featureToCheck, context)) || _availabilityRules.Count == 0;
             var customRulesCheckSuccessful = featureToCheck.AdditionalRules.All(rule => rule.IsAvailable(featureToCheck, context)) || featureToCheck.AdditionalRules.Count == 0;

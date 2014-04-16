@@ -15,14 +15,9 @@ namespace ReallySimpleFeatureToggle
 
         public bool IsAvailable(string feature)
         {
-            try
-            {
-                return this[feature].IsAvailable;
-            }
-            catch (KeyNotFoundException e)
-            {
-                return FeatureNotConfiguredBehaviour.GetFeatureAvailabilityWhenFeatureWasNotConfigured(feature, e);
-            }
+            return ContainsKey(feature)
+                ? this[feature].IsAvailable
+                : FeatureNotConfiguredBehaviour.GetFeatureAvailabilityWhenFeatureWasNotConfigured(feature);
         }
 
         public IFeatureNotConfiguredBehaviour FeatureNotConfiguredBehaviour

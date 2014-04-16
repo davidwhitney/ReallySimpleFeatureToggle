@@ -11,7 +11,7 @@ namespace ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours
             _value = value;
         }
 
-        public bool GetFeatureAvailabilityWhenFeatureWasNotConfigured(string featureName, Exception anyException)
+        public bool GetFeatureAvailabilityWhenFeatureWasNotConfigured(string featureName)
         {
             return _value;
         }

@@ -4,9 +4,9 @@ namespace ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours
 {
     public class ThrowANotConfiguredException : IFeatureNotConfiguredBehaviour
     {
-        public bool GetFeatureAvailabilityWhenFeatureWasNotConfigured(string featureName, Exception anyException)
+        public bool GetFeatureAvailabilityWhenFeatureWasNotConfigured(string featureName)
         {
-            throw new FeatureNotConfiguredException(featureName, anyException);
+            throw new FeatureNotConfiguredException(featureName);
         }
     }
 }
