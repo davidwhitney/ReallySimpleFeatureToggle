@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ReallySimpleFeatureToggle.AvailabilityRules;
 using ReallySimpleFeatureToggle.Configuration;
@@ -37,8 +36,10 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
 
             foreach (var feature in featureSettings)
             {
-                var isAvailable = CalculateAvailability(feature, context, featureSettings);
-                featureConfiguration.Add(feature.Name, new ActiveSettings {Dependencies = feature.Dependencies, IsAvailable = isAvailable});
+                var availability = CalculateAvailability(feature, context, featureSettings);
+                var activeSettings = new ActiveSettings {Dependencies = feature.Dependencies, IsAvailable = availability};
+
+                featureConfiguration.Add(feature.Name, activeSettings);
             }
 
             foreach (var rule in _featureOverrides)
@@ -75,10 +76,10 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
 
             relatedFeatures.Remove(featureToCheck);
 
-            var globalAvailabilityCheckSuccessful = _availabilityRules.All(rule => rule.IsAvailable(featureToCheck, context)) || _availabilityRules.Count == 0;
-            var customRulesCheckSuccessful = featureToCheck.AdditionalRules.All(rule => rule.IsAvailable(featureToCheck, context)) || featureToCheck.AdditionalRules.Count == 0;
+            var globalRulesPassed = _availabilityRules.All(rule => rule.IsAvailable(featureToCheck, context)) || _availabilityRules.Count == 0;
+            var featureRulesPassed = featureToCheck.AdditionalRules.All(rule => rule.IsAvailable(featureToCheck, context)) || featureToCheck.AdditionalRules.Count == 0;
             
-            return globalAvailabilityCheckSuccessful && customRulesCheckSuccessful;
+            return globalRulesPassed && featureRulesPassed;
         }
     }
 }
