@@ -51,6 +51,8 @@
     <Compile Include="AvailabilityRules\CookieSettingStorage\FeatureOptionsCookie.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\FeatureOptionsCookieParser.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\IFeatureOptionsCookieParser.cs" />
+    <Compile Include="FeatureStateEvaluation\EvaluationContextBuilderForWeb.cs" />
+    <Compile Include="FeatureStateEvaluation\EvaluationContextForWebProjects.cs" />
     <Compile Include="FeatureOverrides\QueryStringOverrideRule.cs" />
     <Compile Include="WebPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -40,7 +40,6 @@
       <HintPath>..\packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,8 +62,10 @@
     <Compile Include="Configuration\IFeatureWithFluentExtensions.cs" />
     <Compile Include="Configuration\FeatureNotConfiguredBehaviours\ReturnBoolWhenFeatureNotConfigured.cs" />
     <Compile Include="Configuration\FeatureNotConfiguredBehaviours\ThrowANotConfiguredException.cs" />
+    <Compile Include="FeatureStateEvaluation\DefaultEvaluationContextBuilder.cs" />
     <Compile Include="Extensibility\IPluginBootstrapper.cs" />
     <Compile Include="FeatureOverrides\IFeatureOverrideRule.cs" />
+    <Compile Include="FeatureStateEvaluation\IEvaluationContextBuilder.cs" />
     <Compile Include="Infrastructure\IRandomNumberGenerator.cs" />
     <Compile Include="Infrastructure\RandomNumberGenerator.cs" />
     <Compile Include="AvailabilityRules\MustBeEnabledOrEnabledForPercentageRule.cs" />

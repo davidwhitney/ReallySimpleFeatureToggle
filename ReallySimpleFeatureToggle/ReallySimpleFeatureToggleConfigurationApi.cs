@@ -7,6 +7,7 @@ using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
 using ReallySimpleFeatureToggle.Configuration.FluentConfigProvider;
 using ReallySimpleFeatureToggle.Extensibility;
 using ReallySimpleFeatureToggle.FeatureOverrides;
+using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 using ReallySimpleFeatureToggle.Infrastructure;
 
 namespace ReallySimpleFeatureToggle
@@ -19,11 +20,16 @@ namespace ReallySimpleFeatureToggle
         public IList<IAvailabilityRule> DefaultAvailabilityRules { get; private set; }
         public IList<IFeatureOverrideRule> OverrideRules { get; private set; }
         public IFeatureNotConfiguredBehaviour FeatureNotConfiguredBehaviour { get; private set; }
+        public IEvaluationContextBuilder EvaluationContextBuilder { get; private set; }
 
         public ReallySimpleFeatureToggleConfigurationApi(ReallySimpleFeature reallySimpleFeature)
         {
             Parent = reallySimpleFeature;
-            FeatureConfigRepository = new CachingFeaturesRepository(new AppConfigFeatureRepository(), new TimeSpan(0, 0, 30));
+
+            var compiler = new DynamicAvailabilityRuleCompiler(() => EvaluationContextBuilder);
+            var appConfigRepo = new AppConfigFeatureRepository(compiler);
+
+            FeatureConfigRepository = new CachingFeaturesRepository(appConfigRepo, new TimeSpan(0, 0, 30));
             DefaultAvailabilityRules = new List<IAvailabilityRule>
             {
                 new MustBeAvailableForCurrentTenantRule(),
@@ -33,6 +39,7 @@ namespace ReallySimpleFeatureToggle
 
             OverrideRules = new List<IFeatureOverrideRule>();
             FeatureNotConfiguredBehaviour = new ThrowANotConfiguredException();
+            EvaluationContextBuilder = new DefaultEvaluationContextBuilder();
         }
 
         public IReallySimpleFeatureToggleConfigurationApi GlobalAvailabilityRules(Action<IList<IAvailabilityRule>> mutator)
@@ -71,6 +78,12 @@ namespace ReallySimpleFeatureToggle
         public IReallySimpleFeatureToggleConfigurationApi WhenFeatureRequestedIsNotConfigured(IFeatureNotConfiguredBehaviour notConfiguredBehaviour)
         {
             FeatureNotConfiguredBehaviour = notConfiguredBehaviour;
+            return this;
+        }
+
+        public IReallySimpleFeatureToggleConfigurationApi CreateEvaluationContextBy(IEvaluationContextBuilder factoryFunc)
+        {
+            EvaluationContextBuilder = factoryFunc ?? new DefaultEvaluationContextBuilder();
             return this;
         }
 

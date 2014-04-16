@@ -35,7 +35,7 @@ namespace ReallySimpleFeatureToggle.Web.Test.Unit.AvailabilityRules
             _featureAvailabilityRules = new List<IAvailabilityRule> { stateRule };
 
             _evaluator = new FeatureEvaluator(_featureSettingRepo.Object,
-                                                      _featureAvailabilityRules, new List<IFeatureOverrideRule>(), new ThrowANotConfiguredException());
+                _featureAvailabilityRules, new List<IFeatureOverrideRule>(), new ThrowANotConfiguredException(), null);
         }
 
         [Test]

@@ -9,10 +9,12 @@ namespace ReallySimpleFeatureToggle.AvailabilityRules
 {
     public class DynamicAvailabilityRuleCompiler
     {
+        private readonly Func<IEvaluationContextBuilder> _funcToGetConfiguredEvaluationContextTypeFrom;
         private readonly ConcurrentDictionary<string, IAvailabilityRule> _cachedAvailabilityRules; 
 
-        public DynamicAvailabilityRuleCompiler()
+        public DynamicAvailabilityRuleCompiler(Func<IEvaluationContextBuilder> funcToGetConfiguredEvaluationContextTypeFrom)
         {
+            _funcToGetConfiguredEvaluationContextTypeFrom = funcToGetConfiguredEvaluationContextTypeFrom;
             _cachedAvailabilityRules = new ConcurrentDictionary<string, IAvailabilityRule>();
         }
 
@@ -29,10 +31,12 @@ namespace ReallySimpleFeatureToggle.AvailabilityRules
             }
         }
 
-        private static IAvailabilityRule Compile(string expression)
+        private IAvailabilityRule Compile(string expression)
         {
+            var instanceTypeToMapIntoLambda = _funcToGetConfiguredEvaluationContextTypeFrom().Create(Tenant.All).GetType();
+
             var featureParameter = Expression.Parameter(typeof (IFeature), "feature");
-            var contextParameter = Expression.Parameter(typeof (EvaluationContext), "context");
+            var contextParameter = Expression.Parameter(instanceTypeToMapIntoLambda, "context");
 
             var lambdaExpression = DynamicExpression.ParseLambda(new[] {featureParameter, contextParameter}, typeof (bool), expression);
 

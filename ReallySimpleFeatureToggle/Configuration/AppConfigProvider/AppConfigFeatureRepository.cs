@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using ReallySimpleFeatureToggle.AvailabilityRules;
+using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 
 namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
 {
@@ -9,9 +10,9 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
     {
         private readonly DynamicAvailabilityRuleCompiler _compiler;
 
-        public AppConfigFeatureRepository()
+        public AppConfigFeatureRepository(DynamicAvailabilityRuleCompiler compiler = null)
         {
-            _compiler = new DynamicAvailabilityRuleCompiler();
+            _compiler = compiler ?? new DynamicAvailabilityRuleCompiler(() => new DefaultEvaluationContextBuilder());
         }
 
         public ICollection<IFeature> GetFeatureSettings()

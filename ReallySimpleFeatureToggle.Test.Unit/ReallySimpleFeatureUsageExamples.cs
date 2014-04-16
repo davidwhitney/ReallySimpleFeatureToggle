@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
 using NUnit.Framework;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.AppConfigProvider;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
-using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 using ReallySimpleFeatureToggle.Test.Unit.TestHelpers;
-using System;
-using System.Linq.Dynamic;
-using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 namespace ReallySimpleFeatureToggle.Test.Unit
 {

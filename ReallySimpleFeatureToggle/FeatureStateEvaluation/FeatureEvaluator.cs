@@ -14,18 +14,21 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
         private readonly IList<IAvailabilityRule> _availabilityRules;
         private readonly IEnumerable<IFeatureOverrideRule> _featureOverrides;
         private readonly IFeatureNotConfiguredBehaviour _featureNotConfiguredBehaviour;
+        private readonly IEvaluationContextBuilder _evaluationContextBuilder;
 
-        public FeatureEvaluator(IFeatureRepository repository, IList<IAvailabilityRule> availabilityRules, IEnumerable<IFeatureOverrideRule> featureOverrides, IFeatureNotConfiguredBehaviour featureNotConfiguredBehaviour)
+        public FeatureEvaluator(IFeatureRepository repository, IList<IAvailabilityRule> availabilityRules, IEnumerable<IFeatureOverrideRule> featureOverrides, IFeatureNotConfiguredBehaviour featureNotConfiguredBehaviour, IEvaluationContextBuilder evaluationContextBuilder)
         {
             _repository = repository;
             _availabilityRules = availabilityRules;
             _featureOverrides = featureOverrides;
             _featureNotConfiguredBehaviour = featureNotConfiguredBehaviour;
+            _evaluationContextBuilder = evaluationContextBuilder ?? new DefaultEvaluationContextBuilder();
         }
 
         public IFeatureConfiguration LoadConfiguration(string forTenant = Tenant.All)
         {
-            var context = new EvaluationContext { Tenant = forTenant };
+            var context = _evaluationContextBuilder.Create(forTenant);
+
             var featureConfiguration = new FeatureConfiguration();
             featureConfiguration.FeatureNotConfiguredBehaviour = _featureNotConfiguredBehaviour;
 

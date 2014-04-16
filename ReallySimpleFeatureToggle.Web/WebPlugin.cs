@@ -5,6 +5,7 @@ using ReallySimpleFeatureToggle.Infrastructure;
 using ReallySimpleFeatureToggle.Web.AvailabilityRules;
 using ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage;
 using ReallySimpleFeatureToggle.Web.FeatureOverrides;
+using ReallySimpleFeatureToggle.Web.FeatureStateEvaluation;
 
 namespace ReallySimpleFeatureToggle.Web
 {
@@ -34,6 +35,8 @@ namespace ReallySimpleFeatureToggle.Web
                     rules.Add(new MustBeEnabledOrEnabledForPercentageStickyRule(new RandomNumberGenerator(), new FeatureOptionsCookieParser()));
                 });
             }
+
+            configurationApi.Parent.Configure.CreateEvaluationContextBy(new EvaluationContextBuilderForWeb());
         }
     }
 }

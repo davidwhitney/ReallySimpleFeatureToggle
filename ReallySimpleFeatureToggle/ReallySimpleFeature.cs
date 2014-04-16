@@ -19,7 +19,8 @@ namespace ReallySimpleFeatureToggle
         public IFeatureConfiguration GetFeatureConfiguration(string tenant = Tenant.All)
         {
             var evaluator = new FeatureEvaluator(_configurationApi.FeatureConfigRepository,
-                _configurationApi.DefaultAvailabilityRules, _configurationApi.OverrideRules, _configurationApi.FeatureNotConfiguredBehaviour);
+                _configurationApi.DefaultAvailabilityRules, _configurationApi.OverrideRules,
+                _configurationApi.FeatureNotConfiguredBehaviour, _configurationApi.EvaluationContextBuilder);
 
             return evaluator.LoadConfiguration(tenant);
         }

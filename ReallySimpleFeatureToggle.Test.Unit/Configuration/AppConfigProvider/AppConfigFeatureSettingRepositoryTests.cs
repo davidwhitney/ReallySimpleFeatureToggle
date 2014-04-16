@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using ReallySimpleFeatureToggle.AvailabilityRules;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.AppConfigProvider;
+using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 
 namespace ReallySimpleFeatureToggle.Test.Unit.Configuration.AppConfigProvider
 {
@@ -15,7 +17,7 @@ namespace ReallySimpleFeatureToggle.Test.Unit.Configuration.AppConfigProvider
         [SetUp]
         public void SetUp()
         {
-            _wcfsr =  new AppConfigFeatureRepository();
+            _wcfsr = new AppConfigFeatureRepository(new DynamicAvailabilityRuleCompiler(() => new DefaultEvaluationContextBuilder()));
             _configSettings = _wcfsr.GetFeatureSettings();
         }
 

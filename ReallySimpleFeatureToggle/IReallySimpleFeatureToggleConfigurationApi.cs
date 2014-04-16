@@ -5,6 +5,7 @@ using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
 using ReallySimpleFeatureToggle.Extensibility;
 using ReallySimpleFeatureToggle.FeatureOverrides;
+using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 
 namespace ReallySimpleFeatureToggle
 {
@@ -19,6 +20,7 @@ namespace ReallySimpleFeatureToggle
         /// Defaults to ThrowANotConfiguredException. Options: "FeatureShouldBeEnabled", "FeatureShouldBeDisabled".
         /// </summary>
         IReallySimpleFeatureToggleConfigurationApi WhenFeatureRequestedIsNotConfigured(IFeatureNotConfiguredBehaviour notConfiguredBehaviour);
+        IReallySimpleFeatureToggleConfigurationApi CreateEvaluationContextBy(IEvaluationContextBuilder factoryFunc);
 
         IReallySimpleFeatureToggleConfigurationApi WithPlugin(IPluginBootstrapper pluginBootstrapper);
 
