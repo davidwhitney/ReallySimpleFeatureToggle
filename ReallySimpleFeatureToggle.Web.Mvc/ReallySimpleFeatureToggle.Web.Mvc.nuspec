@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>David Whitney</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/davidwhitney/ReallySimpleFeatureToggle</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>ASP.NET MVC extensions for ReallySimpleFeatureToggle</summary>
+    <description>$description$</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>configuration feature-wall feature-configuration enabled-for-percentage feature feature toggle web mvt reallysimplefeaturetoggle MVC</tags>
+  </metadata>
+  <dependencies>
+	<dependency id="ReallySimpleFeatureToggle" version="$version$" />
+	<dependency id="ReallySimpleFeatureToggle.Web" version="$version$" />
+  </dependencies>
+</package>
