@@ -1,36 +1,16 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("ReallySimpleFeature.Web")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ReallySimpleFeatureToggle.Web")]
+[assembly: AssemblyDescription("Reconfigured RSFT for web projects - adds cookie persistence to percentaged availability rules, offers query string overrides, enhances the feature configuration evaluation context so you can build rules based around HttpContext.Current")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ReallySimpleFeature.Web")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("Electric Head Software")]
+[assembly: AssemblyProduct("ReallySimpleFeatureToggle.Web")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9fc8c3ec-840c-48b1-b5b7-a724711b94e5")]
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

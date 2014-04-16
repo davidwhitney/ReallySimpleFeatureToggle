@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>David Whitney</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/davidwhitney/ReallySimpleFeatureToggle</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>Web extensions for ReallySimpleFeatureToggle</summary>
+    <description>$description$</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>configuration feature-wall feature-configuration enabled-for-percentage feature feature toggle web mvt reallysimplefeaturetoggle</tags>
+  </metadata>
+</package>
