@@ -10,7 +10,9 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
         {
             var cfg = (IFeatureConfigurationSection)ConfigurationManager.GetSection("features");
             var featureSettings = cfg.FeatureSettings.Cast<FeatureConfigurationElement>().ToList();
-            return featureSettings.Select(fcse => new Feature(fcse.Name)
+            return featureSettings.Select(fcse =>
+            {
+                var feature = new Feature(fcse.Name)
                 {
                     Dependencies = fcse.Dependencies,
                     State = fcse.State,
@@ -19,7 +21,22 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
                     StartDtg = fcse.StartDtg,
                     EndDtg = fcse.EndDtg,
                     RandomPercentageEnabled = fcse.RandomPercentageEnabled,
-                }).Cast<IFeature>().ToList();
+                };
+
+                var compiler = new DynamicAvailabilityRuleCompiler();
+                foreach (var dynamicRule in fcse.Rules.Cast<DynamicRuleConfigurationElement>())
+                {
+                    var rule = compiler.TryCompile(dynamicRule.Rule);
+
+                    if (rule != null)
+                    {
+                        feature.AdditionalRules.Add(rule);
+                    }
+                }
+
+                return feature;
+
+            }).Cast<IFeature>().ToList();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReallySimpleFeatureToggle.AvailabilityRules;
+using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 
 namespace ReallySimpleFeatureToggle.Configuration
 {
@@ -81,6 +82,19 @@ namespace ReallySimpleFeatureToggle.Configuration
         {
             StartDtg = startTime;
             EndDtg = endTime;
+            return this;
+        }
+
+        public IFeatureWithFluentExtensions WithCustomAvailabilityRule(Func<IFeature, EvaluationContext, bool> evaluation)
+        {
+            var customRule = new AvailabilityRuleShim(evaluation);
+            AdditionalRules.Add(customRule);
+            return this;
+        }
+
+        public IFeatureWithFluentExtensions WithCustomAvailabilityRule(IAvailabilityRule rule)
+        {
+            AdditionalRules.Add(rule);
             return this;
         }
 

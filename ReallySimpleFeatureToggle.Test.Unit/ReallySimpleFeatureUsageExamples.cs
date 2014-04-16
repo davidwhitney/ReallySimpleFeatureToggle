@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using NUnit.Framework;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.AppConfigProvider;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
+using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 using ReallySimpleFeatureToggle.Test.Unit.TestHelpers;
+using System;
+using System.Linq.Dynamic;
+using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 namespace ReallySimpleFeatureToggle.Test.Unit
 {
@@ -37,14 +43,17 @@ namespace ReallySimpleFeatureToggle.Test.Unit
             var featureSet = new ReallySimpleFeature().Configure
                 .WithFeatures(x =>
                 {
-                    x.Add(Feature.Called("Awesome").ThatIsEnabled());
+                    x.Add(Feature.Called("Awesome").ThatIsEnabled()
+                        .WithCustomAvailabilityRule((feature, context) =>
+                        {
+                            return true;
+                        }));
                     x.Add(Feature.Called("Awesome2").ThatIsEnabled());
                     x.Add(Feature.Called("Awesome3").ThatIsDisabled());
                     x.Add(Feature.Called("Awesome4").EnabledForPercentage(50));
                     x.Add(Feature.Called("Awesome5").OnlyAvailableBetween(DateTime.Now, DateTime.Now.AddDays(5)));
                 })
                 .And().GetFeatureConfiguration();
-
 
             Assert.That(featureSet.IsAvailable("Awesome"), Is.True);
             Assert.That(featureSet.IsAvailable("Awesome3"), Is.False);

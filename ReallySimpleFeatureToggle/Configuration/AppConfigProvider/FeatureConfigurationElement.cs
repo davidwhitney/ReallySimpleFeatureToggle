@@ -130,5 +130,15 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
             get { return (int) this["randomPercentageEnabled"]; }
             set { this["randomPercentageEnabled"] = value; }
         }
+
+        private static readonly ConfigurationProperty DynamicRules =
+            new ConfigurationProperty(null, typeof(DynamicRuleElementCollection), null,
+                ConfigurationPropertyOptions.IsDefaultCollection);
+
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public DynamicRuleElementCollection Rules
+        {
+            get { return ((DynamicRuleElementCollection)this[DynamicRules]); }
+        }
     }
 }
