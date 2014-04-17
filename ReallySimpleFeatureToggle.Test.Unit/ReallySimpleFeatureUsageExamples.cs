@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using ReallySimpleFeatureToggle.AvailabilityRules;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.Configuration.AppConfigProvider;
 using ReallySimpleFeatureToggle.Configuration.FeatureNotConfiguredBehaviours;
@@ -41,7 +42,8 @@ namespace ReallySimpleFeatureToggle.Test.Unit
                         .WithCustomAvailabilityRule((feature, context) =>
                         {
                             return true;
-                        }));
+                        })
+                        .WithCustomAvailabilityRule(new MustBeAvailableForCurrentTenantRule()));
                     x.Add(Feature.Called("Awesome2").ThatIsEnabled());
                     x.Add(Feature.Called("Awesome3").ThatIsDisabled());
                     x.Add(Feature.Called("Awesome4").EnabledForPercentage(50));

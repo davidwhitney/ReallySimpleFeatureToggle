@@ -20,7 +20,7 @@ namespace ReallySimpleFeatureToggle
         /// Defaults to ThrowANotConfiguredException. Options: "FeatureShouldBeEnabled", "FeatureShouldBeDisabled".
         /// </summary>
         IReallySimpleFeatureToggleConfigurationApi WhenFeatureRequestedIsNotConfigured(IFeatureNotConfiguredBehaviour notConfiguredBehaviour);
-        IReallySimpleFeatureToggleConfigurationApi CreateEvaluationContextBy(IEvaluationContextBuilder factoryFunc);
+        IReallySimpleFeatureToggleConfigurationApi WithEvaluationContextOf<TEvaluationContextType>(IEvaluationContextBuilder factoryFunc) where TEvaluationContextType : EvaluationContext;
 
         IReallySimpleFeatureToggleConfigurationApi WithPlugin(IPluginBootstrapper pluginBootstrapper);
 

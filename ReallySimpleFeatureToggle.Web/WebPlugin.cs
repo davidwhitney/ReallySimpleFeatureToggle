@@ -36,7 +36,7 @@ namespace ReallySimpleFeatureToggle.Web
                 });
             }
 
-            configurationApi.Parent.Configure.CreateEvaluationContextBy(new EvaluationContextBuilderForWeb());
+            configurationApi.Parent.Configure.WithEvaluationContextOf<EvaluationContextForWebProjects>(new EvaluationContextBuilderForWeb());
         }
     }
 }

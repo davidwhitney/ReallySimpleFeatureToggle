@@ -2,19 +2,18 @@
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using ReallySimpleFeatureToggle.Configuration;
-using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 namespace ReallySimpleFeatureToggle.AvailabilityRules
 {
     public class DynamicAvailabilityRuleCompiler
     {
-        private readonly Func<IEvaluationContextBuilder> _funcToGetConfiguredEvaluationContextTypeFrom;
+        private readonly Func<Type> _evaluationContextType;
         private readonly ConcurrentDictionary<string, IAvailabilityRule> _cachedAvailabilityRules; 
 
-        public DynamicAvailabilityRuleCompiler(Func<IEvaluationContextBuilder> funcToGetConfiguredEvaluationContextTypeFrom)
+        public DynamicAvailabilityRuleCompiler(Func<Type> evaluationContextType)
         {
-            _funcToGetConfiguredEvaluationContextTypeFrom = funcToGetConfiguredEvaluationContextTypeFrom;
+            _evaluationContextType = evaluationContextType;
             _cachedAvailabilityRules = new ConcurrentDictionary<string, IAvailabilityRule>();
         }
 
@@ -33,10 +32,8 @@ namespace ReallySimpleFeatureToggle.AvailabilityRules
 
         private IAvailabilityRule Compile(string expression)
         {
-            var instanceTypeToMapIntoLambda = _funcToGetConfiguredEvaluationContextTypeFrom().Create(Tenant.All).GetType();
-
             var featureParameter = Expression.Parameter(typeof (IFeature), "feature");
-            var contextParameter = Expression.Parameter(instanceTypeToMapIntoLambda, "context");
+            var contextParameter = Expression.Parameter(_evaluationContextType(), "context");
 
             var lambdaExpression = DynamicExpression.ParseLambda(new[] {featureParameter, contextParameter}, typeof (bool), expression);
 

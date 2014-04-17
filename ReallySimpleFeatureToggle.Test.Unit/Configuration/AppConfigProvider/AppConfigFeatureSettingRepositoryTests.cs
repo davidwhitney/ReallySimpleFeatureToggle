@@ -17,7 +17,7 @@ namespace ReallySimpleFeatureToggle.Test.Unit.Configuration.AppConfigProvider
         [SetUp]
         public void SetUp()
         {
-            _wcfsr = new AppConfigFeatureRepository(new DynamicAvailabilityRuleCompiler(() => new DefaultEvaluationContextBuilder()));
+            _wcfsr = new AppConfigFeatureRepository(new DynamicAvailabilityRuleCompiler(() => typeof(EvaluationContext)));
             _configSettings = _wcfsr.GetFeatureSettings();
         }
 

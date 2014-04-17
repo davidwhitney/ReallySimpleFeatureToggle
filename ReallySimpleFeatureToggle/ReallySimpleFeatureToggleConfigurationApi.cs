@@ -20,13 +20,15 @@ namespace ReallySimpleFeatureToggle
         public IList<IAvailabilityRule> DefaultAvailabilityRules { get; private set; }
         public IList<IFeatureOverrideRule> OverrideRules { get; private set; }
         public IFeatureNotConfiguredBehaviour FeatureNotConfiguredBehaviour { get; private set; }
+
+        public Type EvaluationContextType { get; set; }
         public IEvaluationContextBuilder EvaluationContextBuilder { get; private set; }
 
         public ReallySimpleFeatureToggleConfigurationApi(ReallySimpleFeature reallySimpleFeature)
         {
             Parent = reallySimpleFeature;
 
-            var compiler = new DynamicAvailabilityRuleCompiler(() => EvaluationContextBuilder);
+            var compiler = new DynamicAvailabilityRuleCompiler(() => EvaluationContextType);
             var appConfigRepo = new AppConfigFeatureRepository(compiler);
 
             FeatureConfigRepository = new CachingFeaturesRepository(appConfigRepo, new TimeSpan(0, 0, 30));
@@ -39,6 +41,8 @@ namespace ReallySimpleFeatureToggle
 
             OverrideRules = new List<IFeatureOverrideRule>();
             FeatureNotConfiguredBehaviour = new ThrowANotConfiguredException();
+
+            EvaluationContextType = typeof (EvaluationContext);
             EvaluationContextBuilder = new DefaultEvaluationContextBuilder();
         }
 
@@ -81,8 +85,9 @@ namespace ReallySimpleFeatureToggle
             return this;
         }
 
-        public IReallySimpleFeatureToggleConfigurationApi CreateEvaluationContextBy(IEvaluationContextBuilder factoryFunc)
+        public IReallySimpleFeatureToggleConfigurationApi WithEvaluationContextOf<TEvaluationContextType>(IEvaluationContextBuilder factoryFunc) where TEvaluationContextType : EvaluationContext
         {
+            EvaluationContextType = typeof (TEvaluationContextType);
             EvaluationContextBuilder = factoryFunc ?? new DefaultEvaluationContextBuilder();
             return this;
         }

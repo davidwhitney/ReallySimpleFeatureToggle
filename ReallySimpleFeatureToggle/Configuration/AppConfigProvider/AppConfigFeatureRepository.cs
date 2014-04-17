@@ -12,7 +12,7 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
 
         public AppConfigFeatureRepository(DynamicAvailabilityRuleCompiler compiler = null)
         {
-            _compiler = compiler ?? new DynamicAvailabilityRuleCompiler(() => new DefaultEvaluationContextBuilder());
+            _compiler = compiler ?? new DynamicAvailabilityRuleCompiler(() => typeof(EvaluationContext));
         }
 
         public ICollection<IFeature> GetFeatureSettings()
