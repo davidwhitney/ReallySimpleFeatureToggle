@@ -11,7 +11,7 @@ namespace ReallySimpleFeatureToggle.Web.ExampleMvcSite
         protected void Application_Start()
         {
             ReallySimpleFeature.Toggles.Configure
-                .WithPlugin(new WebPlugin())
+                .WithPlugin(new WebPlugin(persistRandomPercentageResultToCookie:true))
                 .WithPlugin(new MvcPlugin());
 
             AreaRegistration.RegisterAllAreas();

@@ -29,7 +29,8 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
             try
             {
-                return _serializer.DeserializeObject<FeatureOptionsCookie>(cookie.Value) ?? defaultCookie;
+                var urlDecoded = HttpUtility.UrlDecode(cookie.Value);
+                return _serializer.DeserializeObject<FeatureOptionsCookie>(urlDecoded) ?? defaultCookie;
             }
             catch // Just in case our cookie format changes
             {
@@ -63,7 +64,8 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
         public void SetFeatureOptionsCookie(HttpContextBase context, FeatureOptionsCookie featureOptions)
         {
             var cookieContent = _serializer.SerializeObject(featureOptions);
-            var cookie = new HttpCookie(CookieName, cookieContent) { Expires = 365.Days().Hence(), Path = "/" };
+            var urlEncoded = HttpUtility.UrlEncode(cookieContent);
+            var cookie = new HttpCookie(CookieName, urlEncoded) { Expires = 365.Days().Hence(), Path = "/" };
             context.Response.SetCookie(cookie);
         }
 
