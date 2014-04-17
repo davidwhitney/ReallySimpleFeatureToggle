@@ -1,5 +1,4 @@
 using System.Web;
-using Newtonsoft.Json;
 
 namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
@@ -10,7 +9,7 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
         public FeatureOptionsCookieParser(IJsonSerializer serializer = null)
         {
-            _serializer = serializer ?? new JsonDotNetSerializer();
+            _serializer = serializer ?? new DataContractSerializer();
         }
 
         public FeatureOptionsCookie GetFeatureOptionsCookie()
@@ -63,7 +62,7 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
         public void SetFeatureOptionsCookie(HttpContextBase context, FeatureOptionsCookie featureOptions)
         {
-            var cookieContent = JsonConvert.SerializeObject(featureOptions);
+            var cookieContent = _serializer.SerializeObject(featureOptions);
             var cookie = new HttpCookie(CookieName, cookieContent) { Expires = 365.Days().Hence(), Path = "/" };
             context.Response.SetCookie(cookie);
         }

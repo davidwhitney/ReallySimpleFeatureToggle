@@ -5,11 +5,18 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
     public class DataContractSerializer : IJsonSerializer
     {
+        private readonly DataContractJsonSerializerSettings _settings;
+
+        public DataContractSerializer()
+        {
+            _settings = new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true };
+        }
+
         public string SerializeObject(object obj)
         {
             using (var stream1 = new MemoryStream())
             {
-                var contractJsonSerializer = new DataContractJsonSerializer(obj.GetType());
+                var contractJsonSerializer = new DataContractJsonSerializer(obj.GetType(), _settings);
                 contractJsonSerializer.WriteObject(stream1, obj);
                 stream1.Position = 0;
 
@@ -26,9 +33,11 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
             using (var sw = new StreamWriter(stream))
             {
                 sw.Write(value);
-                stream.Position = 0;
+                sw.Flush();
 
-                var contractJsonSerializer = new DataContractJsonSerializer(typeof (T));
+                stream.Position = 0;
+                
+                var contractJsonSerializer = new DataContractJsonSerializer(typeof(T), _settings);
                 return (T)contractJsonSerializer.ReadObject(stream);
             }
         }
