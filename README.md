@@ -179,9 +179,24 @@ This API offers the following:
 * Control the behaviour of the library when no feature settings are found, defaulting to `ThrowANotConfiguredException` (other options are: `FeatureShouldBeEnabled`, `FeatureShouldBeDisabled`)
 * Wire up an `IFeatureRepository` - the component used to read the initial feature settings (the interface is: `ICollection<IFeature> GetFeatureSettings();`) and optionally tweak the feature setting cache duration, or disable it entirely.
 
-As ReallySimpleFeatureToggle evolves, configuration options will hang off this API.
+## Feature scoped Availability Rules
 
-You're more than welcome to implement and wire-up any or all of these interfaces yourself to compose your own feature configuration pipeline. It's unlikely you'll really want to tweak much more than the IFeatureRepository and the IFeatureOverrides, but you're more than welcome to.
+// todo: write docs
+
+## Dynamic Availability Rules
+
+// todo: write docs
+
+## Lambda Availability Rules
+
+// todo: write docs
+
+## Plugins - IPluginBootstrapper
+
+// todo: write docs
+
+* ReallySimpleFeatureToggle.Web
+* ReallySimpleFeatureToggle.Web.Mvc
 
 
 # Lineage
