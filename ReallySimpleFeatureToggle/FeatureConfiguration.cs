@@ -6,6 +6,7 @@ namespace ReallySimpleFeatureToggle
 {
     public class FeatureConfiguration : Dictionary<string, ActiveSettings>, IFeatureConfiguration
     {
+        public string Tenant { get; set; }
         private IFeatureNotConfiguredBehaviour _featureNotConfiguredBehaviour;
 
         public bool IsAvailable(Enum feature)

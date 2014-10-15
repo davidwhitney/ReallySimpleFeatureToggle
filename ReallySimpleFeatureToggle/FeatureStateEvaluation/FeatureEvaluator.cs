@@ -31,7 +31,12 @@ namespace ReallySimpleFeatureToggle.FeatureStateEvaluation
         public IFeatureConfiguration LoadConfiguration(string forTenant = Tenant.All)
         {
             var context = _evaluationContextBuilder.Create(forTenant);
-            var featureConfiguration = new FeatureConfiguration { FeatureNotConfiguredBehaviour = _featureNotConfiguredBehaviour };
+            var featureConfiguration = new FeatureConfiguration
+            {
+                FeatureNotConfiguredBehaviour = _featureNotConfiguredBehaviour,
+                Tenant = forTenant
+            };
+
             var featureSettings = _repository.GetFeatureSettings();
 
             foreach (var feature in featureSettings)
