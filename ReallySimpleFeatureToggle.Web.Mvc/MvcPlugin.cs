@@ -5,6 +5,12 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
 {
     public class MvcPlugin : IPluginBootstrapper
     {
+        internal static string _tenant;
+        public MvcPlugin(string tenant = null)
+        {
+            _tenant = tenant;
+        }
+
         private static string FeatureCacheKey
         {
             get { return "ReallySimpleFeatureToggle.Web.Mvc.MvcPlugin.FeatureCache"; }
@@ -23,7 +29,7 @@ namespace ReallySimpleFeatureToggle.Web.Mvc
                 return (IFeatureConfiguration)HttpContext.Current.Items[FeatureCacheKey];
             }
 
-            var config = ReallySimpleFeature.Toggles.GetFeatureConfiguration();
+            var config = ReallySimpleFeature.Toggles.GetFeatureConfiguration(_tenant);
             HttpContext.Current.Items[FeatureCacheKey] = config;
             
             return config;
