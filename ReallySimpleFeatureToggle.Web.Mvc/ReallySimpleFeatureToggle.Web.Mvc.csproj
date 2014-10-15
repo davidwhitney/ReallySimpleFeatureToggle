@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ActionFeatureExtensions.cs" />
     <Compile Include="FeatureAttribute.cs" />
+    <Compile Include="IRetrieveTheTenantForThisRequest.cs" />
     <Compile Include="PartialFeatureExtensions.cs" />
     <Compile Include="RenderActionFeatureExtensions.cs" />
     <Compile Include="RenderPartialFeatureExtensions.cs" />
