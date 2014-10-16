@@ -37,6 +37,18 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
             _featureEvaluator = new FeatureEvaluator(_featureSettingRepo.Object,
                 _featureAvailabilityRules, new List<IFeatureOverrideRule>(), new ThrowANotConfiguredException(), null);
         }
+
+        [TestCase("tenant1", "tenant1")]
+        [TestCase("", Tenant.All)]
+        [TestCase(null, Tenant.All)]
+        public void LoadConfiguration_ForTenant_ReturnsCorrectTenantInConfig(string tenantRequested, string tenantExpected)
+        {
+            _featureSettings.Add(new Feature(TestFeatures.TestFeature1));
+
+            var config = _featureEvaluator.LoadConfiguration(tenantRequested);
+
+            Assert.That(config.Tenant, Is.EqualTo(tenantExpected));
+        }
         
         [Test]
         public void IsAvailable_NoCorrespondingFeatureSetting_ThrowsExceptionBecauseThatWasTheHandlerProvided()
@@ -47,6 +59,7 @@ namespace ReallySimpleFeatureToggle.Test.Unit.FeatureStateEvaluation
 
             Assert.Throws<FeatureNotConfiguredException>(() => config.IsAvailable(TestFeatures.TestFeature1));
         }  
+
 
         [Test]
         public void IsAvailable_FeatureEnabled_ReturnsTrue()

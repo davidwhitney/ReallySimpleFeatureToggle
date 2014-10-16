@@ -55,6 +55,7 @@
     <Compile Include="Configuration\AppConfigProvider\FeatureConfigurationElementTests.cs" />
     <Compile Include="Configuration\CachingFeaturesRepositoryTests.cs" />
     <Compile Include="Configuration\FeatureTests.cs" />
+    <Compile Include="Configuration\TenantTests.cs" />
     <Compile Include="FeatureConfigurationTests.cs" />
     <Compile Include="ReallySimpleFeatureTests.cs" />
     <Compile Include="ReallySimpleFeatureToggleConfigurationApiTests.cs" />
