@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Caching;
 
 namespace ReallySimpleFeatureToggle.Configuration
@@ -26,10 +27,14 @@ namespace ReallySimpleFeatureToggle.Configuration
                 return cacheItem.Value as ICollection<IFeature>;
             }
 
+            var cachingPolicy = new CacheItemPolicy
+            {
+                AbsoluteExpiration = DateTime.UtcNow.Add(_expiry),
+                RemovedCallback = arguments => Debug.WriteLine("CachingFeaturesRepository cache expiry")
+            };
+
             var settings = _inner.GetFeatureSettings();
-            _cache.AddOrGetExisting("settings", settings,
-                new CacheItemPolicy {SlidingExpiration = _expiry});
-            
+            _cache.AddOrGetExisting("settings", settings, cachingPolicy);
             return settings;
         }
     }
