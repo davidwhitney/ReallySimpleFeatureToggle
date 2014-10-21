@@ -15,7 +15,6 @@ namespace ReallySimpleFeatureToggle.Web.Mvc.Test.Unit.MvcPluginTests
         {
             _featureSet = new ReallySimpleFeature();
             _configurationApi = _featureSet.Configure as ReallySimpleFeatureToggleConfigurationApi;
-            //MvcPlugin.HttpContext = new HttpContextWrapper(new HttpContext(new HttpRequest("", "http://www.bing.com", ""), new HttpResponse(null)));
         }
 
         [Test]
