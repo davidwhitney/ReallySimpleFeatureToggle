@@ -15,7 +15,6 @@ namespace ReallySimpleFeatureToggle.Web.Mvc.Test.Unit.MvcPluginTests
         {
             _featureSet = new ReallySimpleFeature();
             _configurationApi = _featureSet.Configure as ReallySimpleFeatureToggleConfigurationApi;
-            MvcPlugin.HttpContext = new HttpContextWrapper(new HttpContext(new HttpRequest("", "http://www.bing.com", ""), new HttpResponse(null)));
         }
 
         [Test]
@@ -39,17 +38,6 @@ namespace ReallySimpleFeatureToggle.Web.Mvc.Test.Unit.MvcPluginTests
             Assert.That(featureConfig.Tenant, Is.EqualTo("DEV1"));
         }
 
-        [Test]
-        public void WhenPluginInstalled_MultipleRequestsForSameTenant_CachedItemsReturned()
-        {
-            var plugin = new MvcPlugin(()=>"DEV1");
-            plugin.Configure(_configurationApi);
-
-            var featureConfig1 = FeatureAttribute.GetFeatureConfiguration();
-            var featureConfig2 = FeatureAttribute.GetFeatureConfiguration();
-
-            Assert.That(featureConfig1, Is.EqualTo(featureConfig2));
-        }
 
         [Test]
         public void WhenPluginInstalledWithTenantFunc_SubsequentlyReturnedFeatureConfigurationsFromWhenHelperAreForThatTenant()
