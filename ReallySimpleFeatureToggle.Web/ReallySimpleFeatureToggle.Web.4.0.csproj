@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AvailabilityRules\CookieSettingStorage\DataContractXmlSerializer.cs" />
+    <Compile Include="AvailabilityRules\CookieSettingStorage\DataContractConcatSerializer.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\ICookieDataSerializer.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\SyntaticSugar.cs" />
     <Compile Include="AvailabilityRules\MustBeEnabledOrEnabledForPercentageStickyRule.cs" />

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvailabilityRules\CookieSettingStorage\DataContractConcatSerializerTests.cs" />
     <Compile Include="AvailabilityRules\CookieSettingStorage\DataContractSerializerTests.cs" />
     <Compile Include="AvailabilityRules\FeatureSettingExtensionsStateTests.cs" />
     <Compile Include="FeatureOverrides\QueryStringOverrideRuleTests.cs" />

@@ -27,7 +27,7 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
             }
         }
 
-        public T DeserializeObject<T>(string value)
+        public T DeserializeObject<T>(string value) where T : class
         {
             using (var stream = new MemoryStream())
             using (var sw = new StreamWriter(stream))
