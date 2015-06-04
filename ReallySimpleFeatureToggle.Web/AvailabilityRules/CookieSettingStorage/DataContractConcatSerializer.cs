@@ -8,9 +8,16 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
     public class DataContractConcatSerializer : ICookieDataSerializer
     {
+        private const string TypeMismatchEx = "Concat serializer only supports serializing the FeatureOptionsCookie";
+
         public string SerializeObject(object obj)
         {
-            var typed = (FeatureOptionsCookie) obj;
+            var typed = obj as FeatureOptionsCookie;
+            if (typed == null)
+            {
+                throw new ArgumentException(TypeMismatchEx);
+            }
+
             var sb = new StringBuilder();
             foreach (var item in typed.FeatureStates)
             {
@@ -22,6 +29,11 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
         public T DeserializeObject<T>(string value) where T : class
         {
+            if (typeof(T) != typeof(FeatureOptionsCookie))
+            {
+                throw new ArgumentException(TypeMismatchEx);
+            }
+
             var pairs = value.Split('&');
             var cookieData = new FeatureOptionsCookie();
             foreach (var thisPair in pairs.Select(pair => pair.Split('=')))

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage;
 
@@ -21,6 +22,24 @@ namespace ReallySimpleFeatureToggle.Web.Test.Unit.AvailabilityRules.CookieSettin
             _dtoAsRawCookie = "Feature=True&Feature2=False";
 
             _ser = new DataContractConcatSerializer();
+        }
+
+        [Test]
+        public void SerializeObject_NotAFeatureOptionsCookie_ThrowsArgEx()
+        {
+            var dto = new Dictionary<string,string>();
+
+            var ex = Assert.Throws<ArgumentException>(() => _ser.SerializeObject(dto));
+
+            Assert.That(ex.Message, Is.EqualTo("Concat serializer only supports serializing the FeatureOptionsCookie"));
+        }
+
+        [Test]
+        public void DeserializeObject_TisNotFeatureOptionsCookie_ThrowsArgEx()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => _ser.DeserializeObject<Dictionary<string, string>>("abc"));
+
+            Assert.That(ex.Message, Is.EqualTo("Concat serializer only supports serializing the FeatureOptionsCookie"));
         }
 
         [Test]
