@@ -1,6 +1,6 @@
 namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
-    public interface IJsonSerializer
+    public interface ICookieDataSerializer
     {
         string SerializeObject(object obj);
         T DeserializeObject<T>(string value);

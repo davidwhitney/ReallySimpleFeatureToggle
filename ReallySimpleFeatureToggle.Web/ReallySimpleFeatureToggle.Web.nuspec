@@ -21,4 +21,10 @@
 		Initial release, enable by calling ReallySimpleFeature.Toggles.Configure.WithPlugin(new WebPlugin()); 
 	</releaseNotes> 
   </metadata>
+	<files>
+		<file src="bin\$configuration$\40\$id$.dll" target="lib\net40\" />
+		<file src="bin\$configuration$\40\$id$.pdb" target="lib\net40\" />
+		<file src="bin\$configuration$\45\$id$.dll" target="lib\net45\" />
+		<file src="bin\$configuration$\45\$id$.pdb" target="lib\net45\" />
+	</files>
 </package>

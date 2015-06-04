@@ -1,22 +1,14 @@
-using System.IO;
-using System.Runtime.Serialization.Json;
+﻿using System.IO;
 
 namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
-    public class DataContractSerializer : ICookieDataSerializer
+    public class DataContractXmlSerializer : ICookieDataSerializer
     {
-        private readonly DataContractJsonSerializerSettings _settings;
-
-        public DataContractSerializer()
-        {
-            _settings = new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true };
-        }
-
         public string SerializeObject(object obj)
         {
             using (var stream1 = new MemoryStream())
             {
-                var contractJsonSerializer = new DataContractJsonSerializer(obj.GetType(), _settings);
+                var contractJsonSerializer = new System.Runtime.Serialization.DataContractSerializer(obj.GetType());
                 contractJsonSerializer.WriteObject(stream1, obj);
                 stream1.Position = 0;
 
@@ -36,8 +28,8 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
                 sw.Flush();
 
                 stream.Position = 0;
-                
-                var contractJsonSerializer = new DataContractJsonSerializer(typeof(T), _settings);
+
+                var contractJsonSerializer = new System.Runtime.Serialization.DataContractSerializer(typeof(T));
                 return (T)contractJsonSerializer.ReadObject(stream);
             }
         }

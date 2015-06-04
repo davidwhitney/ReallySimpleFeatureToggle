@@ -36,6 +36,10 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="ReallySimpleFeatureToggle.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ReallySimpleFeatureToggle.Web\bin\Debug\45\ReallySimpleFeatureToggle.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,10 +59,6 @@
     <ProjectReference Include="..\ReallySimpleFeatureToggle.Test.Unit\ReallySimpleFeatureToggle.Test.Unit.csproj">
       <Project>{CE523041-5EB0-4C21-90F6-C2BE2D6B8AB1}</Project>
       <Name>ReallySimpleFeatureToggle.Test.Unit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ReallySimpleFeatureToggle.Web\ReallySimpleFeatureToggle.Web.csproj">
-      <Project>{1548E6CF-A71E-45CA-90B9-4773DB4EBDE2}</Project>
-      <Name>ReallySimpleFeatureToggle.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReallySimpleFeatureToggle\ReallySimpleFeatureToggle.csproj">
       <Project>{300B92EF-79AF-4225-83B3-D89F9995F357}</Project>

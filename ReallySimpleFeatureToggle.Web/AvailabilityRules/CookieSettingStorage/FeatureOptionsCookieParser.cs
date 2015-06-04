@@ -4,12 +4,16 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
     public class FeatureOptionsCookieParser : IFeatureOptionsCookieParser
     {
-        private readonly IJsonSerializer _serializer;
+        private readonly ICookieDataSerializer _serializer;
         public static string CookieName = "FeatureOptions";
 
-        public FeatureOptionsCookieParser(IJsonSerializer serializer = null)
+        public FeatureOptionsCookieParser(ICookieDataSerializer serializer = null)
         {
+            #if NET4
+            _serializer = serializer ?? new DataContractXmlSerializer();
+            #else // NET4+
             _serializer = serializer ?? new DataContractSerializer();
+            #endif
         }
 
         public FeatureOptionsCookie GetFeatureOptionsCookie()
