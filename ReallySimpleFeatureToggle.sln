@@ -17,6 +17,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web", "ReallySimpleFeatureToggle.Web\ReallySimpleFeatureToggle.Web.csproj", "{1548E6CF-A71E-45CA-90B9-4773DB4EBDE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.Test.Unit", "ReallySimpleFeatureToggle.Web.Test.Unit\ReallySimpleFeatureToggle.Web.Test.Unit.csproj", "{F1B7CD9F-FEB0-4563-8958-C9984DCA5992}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1548E6CF-A71E-45CA-90B9-4773DB4EBDE2} = {1548E6CF-A71E-45CA-90B9-4773DB4EBDE2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.ExampleApplicationUsage", "ReallySimpleFeatureToggle.ExampleApplicationUsage\ReallySimpleFeatureToggle.ExampleApplicationUsage.csproj", "{CA97E887-71DD-457C-ACC8-313B65D5158B}"
 EndProject
