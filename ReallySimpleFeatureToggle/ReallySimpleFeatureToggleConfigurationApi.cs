@@ -106,4 +106,35 @@ namespace ReallySimpleFeatureToggle
             return this;
         }
     }
+
+    public static class ListExtensionsForFeatureBuilding
+    {
+        public static IList<IFeature> AddFeature(this IList<IFeature> featureCollection, Enum name, Action<IFeature> mutator = null)
+        {
+            return AddFeature(featureCollection, name.ToString(), mutator);
+        }
+
+        public static IList<IFeature> AddFeature(this IList<IFeature> featureCollection, string name, Action<IFeature> mutator = null)
+        {
+            return AddFeature(featureCollection, name, State.Enabled, mutator);
+        }
+
+        public static IList<IFeature> AddDisabledFeature(this IList<IFeature> featureCollection, Enum name, Action<IFeature> mutator = null)
+        {
+            return AddDisabledFeature(featureCollection, name.ToString(), mutator);
+        }
+
+        public static IList<IFeature> AddDisabledFeature(this IList<IFeature> featureCollection, string name, Action<IFeature> mutator = null)
+        {
+            return AddFeature(featureCollection, name, State.Disabled, mutator);
+        }
+
+        public static IList<IFeature> AddFeature(this IList<IFeature> featureCollection, string name, State state, Action<IFeature> mutator = null)
+        {
+            var feature = new Feature(name) {State = state };
+            mutator?.Invoke(feature);
+            featureCollection.Add(feature);
+            return featureCollection;
+        }
+    }
 }
