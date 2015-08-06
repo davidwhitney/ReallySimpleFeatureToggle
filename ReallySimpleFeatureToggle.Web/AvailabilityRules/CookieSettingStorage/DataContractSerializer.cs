@@ -3,6 +3,7 @@ using System.Runtime.Serialization.Json;
 
 namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 {
+#if NET45
     public class DataContractSerializer : ICookieDataSerializer
     {
         private readonly DataContractJsonSerializerSettings _settings;
@@ -42,4 +43,5 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
             }
         }
     }
+#endif
 }

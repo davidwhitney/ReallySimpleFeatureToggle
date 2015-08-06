@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if NET45
+using System.Collections.Generic;
 using NUnit.Framework;
 using ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage;
 
@@ -42,3 +43,4 @@ namespace ReallySimpleFeatureToggle.Web.Test.Unit.AvailabilityRules.CookieSettin
         }
     }
 }
+#endif

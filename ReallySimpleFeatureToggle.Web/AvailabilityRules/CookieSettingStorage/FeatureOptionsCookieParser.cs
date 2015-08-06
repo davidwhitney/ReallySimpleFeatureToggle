@@ -9,10 +9,10 @@ namespace ReallySimpleFeatureToggle.Web.AvailabilityRules.CookieSettingStorage
 
         public FeatureOptionsCookieParser(ICookieDataSerializer serializer = null)
         {
-            #if NET4
-            _serializer = serializer ?? new DataContractConcatSerializer();
-            #else // NET4+
+            #if NET45
             _serializer = serializer ?? new DataContractSerializer();
+            #else // NET4+
+            _serializer = serializer ?? new DataContractConcatSerializer();
             #endif
         }
 
