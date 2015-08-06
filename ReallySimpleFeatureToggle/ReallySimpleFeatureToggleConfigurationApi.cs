@@ -132,7 +132,7 @@ namespace ReallySimpleFeatureToggle
         public static IList<IFeature> AddFeature(this IList<IFeature> featureCollection, string name, State state, Action<IFeature> mutator = null)
         {
             var feature = new Feature(name) {State = state };
-            mutator?.Invoke(feature);
+            (mutator ?? ((x => { }))).Invoke(feature);
             featureCollection.Add(feature);
             return featureCollection;
         }
