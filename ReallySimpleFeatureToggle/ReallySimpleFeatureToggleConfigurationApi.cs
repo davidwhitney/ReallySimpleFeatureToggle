@@ -72,10 +72,13 @@ namespace ReallySimpleFeatureToggle
 
         public IReallySimpleFeatureToggleConfigurationApi WithFeatures(Action<IList<IFeature>> featureSettingsMutator)
         {
-            var newFeatures = new List<IFeature>();
-            featureSettingsMutator(newFeatures);
-            FeatureConfigRepository = new FluentConfigurationRepository(newFeatures);
+            if (FeatureConfigRepository == null
+                || !(FeatureConfigRepository is FluentConfigurationRepository))
+            {
+                FeatureConfigRepository = new FluentConfigurationRepository();
+            }
 
+            featureSettingsMutator(((FluentConfigurationRepository)FeatureConfigRepository).FeatureStorage);
             return this;
         }
 

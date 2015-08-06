@@ -4,16 +4,16 @@ namespace ReallySimpleFeatureToggle.Configuration.FluentConfigProvider
 {
     public class FluentConfigurationRepository : IFeatureRepository
     {
-        private readonly List<IFeature> _newFeatures;
+        public List<IFeature> FeatureStorage { get; private set; }
 
-        public FluentConfigurationRepository(List<IFeature> newFeatures)
+        public FluentConfigurationRepository()
         {
-            _newFeatures = newFeatures;
+            FeatureStorage = new List<IFeature>();
         }
 
         public ICollection<IFeature> GetFeatureSettings()
         {
-            return _newFeatures;
+            return FeatureStorage;
         }
     }
 }

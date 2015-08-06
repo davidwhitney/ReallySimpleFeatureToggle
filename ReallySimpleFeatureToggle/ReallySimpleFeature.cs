@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using ReallySimpleFeatureToggle.Configuration;
 using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 
@@ -23,6 +25,11 @@ namespace ReallySimpleFeatureToggle
                 _configurationApi.FeatureNotConfiguredBehaviour, _configurationApi.EvaluationContextBuilder);
 
             return evaluator.LoadConfiguration(tenant);
+        }
+
+        public ICollection<IFeature> FeatureSettings
+        {
+            get { return _configurationApi.FeatureConfigRepository.GetFeatureSettings(); }
         }
 
         public IReallySimpleFeatureToggleConfigurationApi Configure

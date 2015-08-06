@@ -17,9 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web", "ReallySimpleFeatureToggle.Web\ReallySimpleFeatureToggle.Web.csproj", "{1548E6CF-A71E-45CA-90B9-4773DB4EBDE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.Test.Unit", "ReallySimpleFeatureToggle.Web.Test.Unit\ReallySimpleFeatureToggle.Web.Test.Unit.csproj", "{F1B7CD9F-FEB0-4563-8958-C9984DCA5992}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1548E6CF-A71E-45CA-90B9-4773DB4EBDE2} = {1548E6CF-A71E-45CA-90B9-4773DB4EBDE2}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.ExampleApplicationUsage", "ReallySimpleFeatureToggle.ExampleApplicationUsage\ReallySimpleFeatureToggle.ExampleApplicationUsage.csproj", "{CA97E887-71DD-457C-ACC8-313B65D5158B}"
 EndProject
@@ -28,14 +25,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.Mvc", "ReallySimpleFeatureToggle.Web.Mvc\ReallySimpleFeatureToggle.Web.Mvc.csproj", "{9D604F95-FFF7-463F-A583-05377787E3EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.Mvc.Test.Unit", "ReallySimpleFeatureToggle.Web.Mvc.Test.Unit\ReallySimpleFeatureToggle.Web.Mvc.Test.Unit.csproj", "{28A15B26-1A93-45FB-A06E-8FE0B85E726B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReallySimpleFeatureToggle.Web.4.0", "ReallySimpleFeatureToggle.Web\ReallySimpleFeatureToggle.Web.4.0.csproj", "{3D530AEA-E95F-494C-BE48-FB5D1FDEFD87}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5D650D75-59C0-43C2-A486-F0FB2A25B866}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2CE4E1BC-E12B-44C4-861E-6C76530CF8A9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{BCDAE24B-893B-4E0B-B853-E9D622E8F10E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,23 +64,8 @@ Global
 		{28A15B26-1A93-45FB-A06E-8FE0B85E726B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28A15B26-1A93-45FB-A06E-8FE0B85E726B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28A15B26-1A93-45FB-A06E-8FE0B85E726B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D530AEA-E95F-494C-BE48-FB5D1FDEFD87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D530AEA-E95F-494C-BE48-FB5D1FDEFD87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D530AEA-E95F-494C-BE48-FB5D1FDEFD87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D530AEA-E95F-494C-BE48-FB5D1FDEFD87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{300B92EF-79AF-4225-83B3-D89F9995F357} = {5D650D75-59C0-43C2-A486-F0FB2A25B866}
-		{CE523041-5EB0-4C21-90F6-C2BE2D6B8AB1} = {2CE4E1BC-E12B-44C4-861E-6C76530CF8A9}
-		{1548E6CF-A71E-45CA-90B9-4773DB4EBDE2} = {5D650D75-59C0-43C2-A486-F0FB2A25B866}
-		{F1B7CD9F-FEB0-4563-8958-C9984DCA5992} = {2CE4E1BC-E12B-44C4-861E-6C76530CF8A9}
-		{CA97E887-71DD-457C-ACC8-313B65D5158B} = {BCDAE24B-893B-4E0B-B853-E9D622E8F10E}
-		{E15AF4E6-14E4-41C6-8B9D-672D9468B012} = {BCDAE24B-893B-4E0B-B853-E9D622E8F10E}
-		{9D604F95-FFF7-463F-A583-05377787E3EF} = {5D650D75-59C0-43C2-A486-F0FB2A25B866}
-		{28A15B26-1A93-45FB-A06E-8FE0B85E726B} = {2CE4E1BC-E12B-44C4-861E-6C76530CF8A9}
-		{3D530AEA-E95F-494C-BE48-FB5D1FDEFD87} = {5D650D75-59C0-43C2-A486-F0FB2A25B866}
 	EndGlobalSection
 EndGlobal

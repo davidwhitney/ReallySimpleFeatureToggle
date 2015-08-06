@@ -19,5 +19,18 @@ namespace ReallySimpleFeatureToggle.Test.Unit.Configuration
                         EndDtg = DateTime.Now.AddDays(2),
                     });
         }
+
+        [Test]
+        public void Ctor_WithEnum_CreatesFeature()
+        {
+            var feature = new Feature(FeatureForTest.MyFeature);
+
+            Assert.That(feature.Name, Is.EqualTo("MyFeature"));
+        }
+
+        public enum FeatureForTest
+        {
+            MyFeature
+        }
     }
 }

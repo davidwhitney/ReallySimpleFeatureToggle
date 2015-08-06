@@ -7,6 +7,10 @@ namespace ReallySimpleFeatureToggle.Configuration
 {
     public class Feature : IFeatureWithFluentExtensions
     {
+        public Feature(Enum feature) : this(feature.ToString())
+        {
+        }
+
         public Feature(string name)
         {
             Name = name;
