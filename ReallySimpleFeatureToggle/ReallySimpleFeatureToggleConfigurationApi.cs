@@ -129,6 +129,11 @@ namespace ReallySimpleFeatureToggle
             return AddFeature(featureCollection, name, State.Disabled, mutator);
         }
 
+        public static IList<IFeature> AddFeature(this IList<IFeature> featureCollection, Enum name, State state, Action<IFeature> mutator = null)
+        {
+            return AddFeature(featureCollection, name.ToString(), state, mutator);
+        }
+
         public static IList<IFeature> AddFeature(this IList<IFeature> featureCollection, string name, State state, Action<IFeature> mutator = null)
         {
             var feature = new Feature(name) {State = state };
