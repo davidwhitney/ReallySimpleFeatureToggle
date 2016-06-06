@@ -67,6 +67,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Fakes\FakeActionDescriptor.cs" />
+    <Compile Include="Fakes\FakeControllerDescriptor.cs" />
+    <Compile Include="Fakes\FakeHttpContext.cs" />
+    <Compile Include="Fakes\FakeRequest.cs" />
+    <Compile Include="Fakes\FakeResponse.cs" />
+    <Compile Include="FeatureAttributeTests.cs" />
     <Compile Include="MvcPluginTests\ConfiguredWithCachingTests.cs" />
     <Compile Include="MvcPluginTests\MultiTenantSupportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
