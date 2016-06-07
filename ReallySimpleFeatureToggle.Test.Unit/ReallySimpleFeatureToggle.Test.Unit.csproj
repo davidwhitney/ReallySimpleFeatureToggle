@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvailabilityRules\MustMatchDynamicRulesTests.cs" />
     <Compile Include="Configuration\AppConfigProvider\AppConfigFeatureSettingRepositoryTests.cs" />
     <Compile Include="Configuration\AppConfigProvider\FeatureConfigurationElementTests.cs" />
     <Compile Include="Configuration\CachingFeaturesRepositoryTests.cs" />
