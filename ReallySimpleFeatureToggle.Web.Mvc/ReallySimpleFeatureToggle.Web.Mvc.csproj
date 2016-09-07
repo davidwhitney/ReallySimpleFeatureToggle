@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureExtensions.cs" />
     <Compile Include="ActionFeatureExtensions.cs" />
     <Compile Include="FeatureAttribute.cs" />
     <Compile Include="IRetrieveTheTenantForThisRequest.cs" />

@@ -4,28 +4,6 @@ using System.Web.Mvc;
 
 namespace ReallySimpleFeatureToggle.Web.Mvc
 {
-    public class Something
-    {
-        public void Method()
-        {
-            if (IsEnabled("new-algo"))
-            {
-                // New Implementation
-            }
-            else
-            {
-                // Old one
-            }
-        }
-
-        private bool IsEnabled(string newAlgo)
-        {
-            return true;
-        }
-    }
-
-
-
     public class FeatureAttribute : ActionFilterAttribute
     {
         public string Feature { get; set; }
