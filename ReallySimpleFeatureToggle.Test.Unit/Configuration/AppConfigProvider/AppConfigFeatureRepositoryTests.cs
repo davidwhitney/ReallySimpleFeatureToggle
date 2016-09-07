@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using NUnit.Framework;
 using ReallySimpleFeatureToggle.AvailabilityRules;
@@ -9,7 +11,7 @@ using ReallySimpleFeatureToggle.FeatureStateEvaluation;
 namespace ReallySimpleFeatureToggle.Test.Unit.Configuration.AppConfigProvider
 {
     [TestFixture]
-    public class AppConfigFeatureSettingRepositoryTests
+    public class AppConfigFeatureRepositoryTests
     {
         private AppConfigFeatureRepository _wcfsr;
         private ICollection<IFeature> _configSettings;
@@ -79,6 +81,24 @@ namespace ReallySimpleFeatureToggle.Test.Unit.Configuration.AppConfigProvider
             Assert.That(feature.SupportedTenants[0], Is.EqualTo("Tenant1"));
             Assert.That(feature.SupportedTenants[1], Is.EqualTo("Tenant2"));
             Assert.That(feature.SupportedTenants[2], Is.EqualTo("Tenant3"));
+        }
+
+        [Test]
+        public void GetFeatureSettings_MissingConfigurationInAppConfigFile_Throws()
+        {
+            _wcfsr = new AppConfigFeatureRepository(null, new DynamicAvailabilityRuleCompiler(() => typeof(EvaluationContext)));
+
+            var ex = Assert.Throws<ConfigurationErrorsException>(() => _wcfsr.GetFeatureSettings());
+
+            Assert.That(ex.Message, Is.EqualTo("The AppConfig Feature Repository requires a valid Configuration section." +
+                                               @"
+<configSections>
+    <section name=""features"" type=""ReallySimpleFeatureToggle.Configuration.AppConfigProvider.FeatureConfigurationSection, ReallySimpleFeatureToggle"" />
+</configSections>
+<features>
+    <add name=""NoStateFeature"" />
+</features>"));
+
         }
     }
 }

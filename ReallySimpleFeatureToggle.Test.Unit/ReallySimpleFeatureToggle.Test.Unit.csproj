@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvailabilityRules\MustMatchDynamicRulesTests.cs" />
-    <Compile Include="Configuration\AppConfigProvider\AppConfigFeatureSettingRepositoryTests.cs" />
+    <Compile Include="Configuration\AppConfigProvider\AppConfigFeatureRepositoryTests.cs" />
     <Compile Include="Configuration\AppConfigProvider\FeatureConfigurationElementTests.cs" />
     <Compile Include="Configuration\CachingFeaturesRepositoryTests.cs" />
     <Compile Include="Configuration\FeatureTests.cs" />

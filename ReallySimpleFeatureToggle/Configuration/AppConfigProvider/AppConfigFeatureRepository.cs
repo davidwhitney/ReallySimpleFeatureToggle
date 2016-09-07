@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using ReallySimpleFeatureToggle.AvailabilityRules;
@@ -8,17 +9,28 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
 {
     public class AppConfigFeatureRepository : IFeatureRepository
     {
+        private readonly IFeatureConfigurationSection _cfg;
         private readonly DynamicAvailabilityRuleCompiler _compiler;
 
         public AppConfigFeatureRepository(DynamicAvailabilityRuleCompiler compiler = null)
+            : this((IFeatureConfigurationSection)ConfigurationManager.GetSection("features"), compiler)
         {
+        }
+
+        public AppConfigFeatureRepository(IFeatureConfigurationSection cfg, DynamicAvailabilityRuleCompiler compiler = null)
+        {
+            _cfg = cfg;
             _compiler = compiler ?? new DynamicAvailabilityRuleCompiler(() => typeof(EvaluationContext));
         }
 
         public ICollection<IFeature> GetFeatureSettings()
         {
-            var cfg = (IFeatureConfigurationSection)ConfigurationManager.GetSection("features");
-            var featureSettings = cfg.FeatureSettings.Cast<FeatureConfigurationElement>().ToList();
+            if (_cfg == null)
+            {
+                throw ConfigMissingException();
+            }
+
+            var featureSettings = _cfg.FeatureSettings.Cast<FeatureConfigurationElement>().ToList();
             return featureSettings.Select(fcse =>
             {
                 var feature = new Feature(fcse.Name)
@@ -45,6 +57,19 @@ namespace ReallySimpleFeatureToggle.Configuration.AppConfigProvider
                 return feature;
 
             }).Cast<IFeature>().ToList();
+        }
+
+        private static ConfigurationErrorsException ConfigMissingException()
+        {
+            return new ConfigurationErrorsException(
+                "The AppConfig Feature Repository requires a valid Configuration section." +
+                @"
+<configSections>
+    <section name=""features"" type=""ReallySimpleFeatureToggle.Configuration.AppConfigProvider.FeatureConfigurationSection, ReallySimpleFeatureToggle"" />
+</configSections>
+<features>
+    <add name=""NoStateFeature"" />
+</features>");
         }
     }
 }
