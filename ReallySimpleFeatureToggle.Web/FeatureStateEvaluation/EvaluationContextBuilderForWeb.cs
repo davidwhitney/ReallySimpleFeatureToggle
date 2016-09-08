@@ -9,7 +9,8 @@ namespace ReallySimpleFeatureToggle.Web.FeatureStateEvaluation
         {
             return new EvaluationContextForWebProjects
             {
-                HttpContext = new HttpContextWrapper(HttpContext.Current)
+                HttpContext = new HttpContextWrapper(HttpContext.Current),
+                Tenant = tenant
             };
         }
     }
